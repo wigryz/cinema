@@ -1,14 +1,36 @@
-executors:
-  java_16:
+version: 2.1
+jobs:
+  test:
     docker:
       - image: 'cimg/openjdk:16.0'
-orbs:
-  maven: circleci/maven@1.1
-version: 2.1
-workflows:
-  maven_test:
-    jobs:
-      - maven/test:
-          executor: java_16
+    steps:
+      - checkout
+      - run:
+          name: Unit and integration tests
+          command: ./mvnw verify
+      - run:
+          name: Save unit test results
+          command: |
+            mkdir -p ~/test-results/unit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/unit/ \;
+      - run:
+          name: Save integration test results
+          command: |
+            mkdir -p ~/test-results/integration/
+            find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} ~/test-results/integration/ \;
       - store_artifacts:
-          path: target/coverage_report
+          path: ~/test-results/unit
+      - store_artifacts:
+          path: ~/test-results/integration
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: target/coverage_reports
+          destination: coverage_reports
+
+workflows:
+  version: 2
+
+  test:
+    jobs:
+      - test
