@@ -1,14 +1,39 @@
-executors:
-  java_16:
-    docker:
-      - image: 'cimg/openjdk:16.0'
-orbs:
-  maven: circleci/maven@1.1
 version: 2.1
-workflows:
-  maven_test:
-    jobs:
-      - maven/test:
-          executor: java_16
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:16.0
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cinema-backend-{{ checksum "pom.xml" }}
+
+      - run:
+          name: Downloading dependencies
+          command: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: cinema-backend-{{ checksum "pom.xml" }}
+
+      - run:
+          name: mvn verify
+          command: ./mvnw verify
+
+      - store_test_results:
+          name: Uploading unit test results
+          path: target/surefire-reports
+
+      - store_test_results:
+          name: Uploading integration test results
+          path: target/failsafe-reports
+
       - store_artifacts:
-          path: target/coverage_report
+          name: Uploading jar to artifact
+          path: target/cinema-backend-0.0.1-SNAPSHOT.jar
+
+      - store_artifacts:
+          name: Uploading coverage reports to artifacts
+          path: target/coverage_reports
