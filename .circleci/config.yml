@@ -10,3 +10,5 @@ workflows:
     jobs:
       - maven/test:
           executor: java_16
+      - store_artifacts:
+          path: target/coverage_report
