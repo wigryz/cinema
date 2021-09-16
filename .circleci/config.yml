@@ -1,0 +1,12 @@
+executors:
+  java_16:
+    docker:
+      - image: 'cimg/openjdk:16.0'
+orbs:
+  maven: circleci/maven@1.1
+version: 2.1
+workflows:
+  maven_test:
+    jobs:
+      - maven/test:
+          executor: java_16
