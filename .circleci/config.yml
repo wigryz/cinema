@@ -29,7 +29,7 @@ jobs:
                 '{ instructions += $4 + $5; covered += $5 } END \
                 { print covered, "/", instructions, " instructions covered"; \
                 print 100*covered/instructions, "% covered" }' \
-                target/coverage_results/jacoco.csv
+                target/coverage_reports/jacoco.csv
 
       - store_test_results:
           name: Uploading unit test results
