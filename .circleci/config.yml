@@ -24,12 +24,25 @@ jobs:
 
       - run:
           name: Coverage printout
+          when: on_success
           command: |
-                awk -F, \
-                '{ instructions += $4 + $5; covered += $5 } END \
-                { print covered, "/", instructions, " instructions covered"; \
-                print 100*covered/instructions, "% covered" }' \
-                target/coverage_reports/jacoco.csv
+            awk -F, \
+              '{ instructions += $4 + $5; intr_cov += $5; \
+                 branches += $6 + $7; bran_cov += $7; \
+                 lines += $8 + $9; line_cov += $9; \
+                 complexity += $10 + $11; comp_cov += $11; \
+                 methods += $12 + $13; meth_cov += $113;} END \
+               { printf "INSTRUCTIONS COVERAGE\n"; \
+                 printf "%6d / %6d = %4.2f%% instructions covered\n", intr_cov, instructions, instructions ? 100*intr_cov/instructions : 0; \
+                 printf "LINES COVERAGE\n"; \
+                 printf "%6d / %6d = %4.2f%% lines covered\n", line_cov, lines, lines ? 100*line_cov/lines : 0; \
+                 printf "METHODS COVERAGE\n"; \
+                 printf "%6d / %6d = %4.2f%% methods covered\n", meth_cov, methods, methods ? 100*meth_cov/methods : 0; \
+                 printf "BRANCHES COVERAGE\n"; \
+                 printf "%6d / %6d = %4.2f%% branches covered\n", bran_cov, branches, branches ? 100*bran_cov/branches : 0; \
+                 printf "COMPLEXITY COVERAGE\n"; \
+                 printf "%6d / %6d = %4.2f%% complexities covered\n", comp_cov, complexity, complexity ? 100*comp_cov/complexity : 0; }' \
+              target/coverage_reports/jacoco.csv
 
       - store_test_results:
           name: Uploading unit test results
