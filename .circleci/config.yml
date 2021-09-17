@@ -19,8 +19,17 @@ jobs:
           key: cinema-backend-{{ checksum "pom.xml" }}
 
       - run:
-          name: mvn verify
+          name: Verify (unit => build => integration )
           command: ./mvnw verify
+
+      - run:
+          name: Coverage printout
+          command: |
+                awk -F, \
+                '{ instructions += $4 + $5; covered += $5 } END \
+                { print covered, "/", instructions, " instructions covered"; \
+                print 100*covered/instructions, "% covered" }' \
+                target/coverage_results/jacoco.csv
 
       - store_test_results:
           name: Uploading unit test results
@@ -29,10 +38,6 @@ jobs:
       - store_test_results:
           name: Uploading integration test results
           path: target/failsafe-reports
-
-      - store_artifacts:
-          name: Uploading jar to artifact
-          path: target/cinema-backend-0.0.1-SNAPSHOT.jar
 
       - store_artifacts:
           name: Uploading coverage reports to artifacts
