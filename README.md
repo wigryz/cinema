@@ -11,30 +11,9 @@ This project is developed by [jlitewka99][jlitewka99] and [wigryz][wigryz].
 
 ## Features
 
-- Here is place for our features.
-- Go ahead and add one!
-- Another one.
-- Writing this just to make this look more professional.
-
 ## Technologies
 
-cinema-backend uses a number of open source projects to work properly:
-- [Spring Boot Framework] - as a main technology,
-- [MySQL] - for database,
-- [Third technology] - we will have to fill this place!
-
-/* probably we can combine those two */
-
 ## Plugins
-
-Add short description for each "bigger" plugin/dependency we are using.
-
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
 
 ## Try out our application!
 
