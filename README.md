@@ -112,8 +112,8 @@ If it is not positive, then come back to code, create new patch and commit it.
 ### Continuous integration
 
 There is a control integration named CircleCI set up for this project. It tests all branches, so after your push
-there will be a run going in the background. After some time you will notice a :heavy_check_mark: if your
-build was successful or :x: if it failed. You can click on it to get more information about tests that failed or
+there will be a run going in the background. After some time you will notice a :heavy_check_mark: - if your
+build was successful or :x: - if it failed. You can click on it to get more information about tests that failed or
 some information about test coverage.
 
 ### Database uml
