@@ -106,6 +106,8 @@ git push --set-upstream <your-branch-name>
 ```
 After that CI will test your change. Then you have to create Pull request, and assign another dev to provide you a review.
 If review is positive, then you can merge your change with master or reviewer will do that for you.
+If it is not positive, then come back to code, create new patch and commit it.  
+(All commits will be squashed before merging to master branch).
 
 ### Continuous integration
 
