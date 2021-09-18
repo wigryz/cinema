@@ -95,9 +95,9 @@ there will be a run going in the background. After some time you will notice a :
 build was successful or :x: - if it failed. You can click on it to get more information about tests that failed or
 some information about test coverage.
 
-### Database uml
+### Database
 
-TODO
+![alt text](https://github.com/wigryz/cinema-backend/master/cinema-db.jpg?raw=true)
 
 ## License
 
