@@ -97,7 +97,7 @@ some information about test coverage.
 
 ### Database
 
-![alt text](https://github.com/wigryz/cinema-backend/master/cinema-db.jpg?raw=true)
+![database_schema](https://github.com/wigryz/cinema-backend/master/cinema-db_schema.jpg?raw=true)
 
 ## License
 
