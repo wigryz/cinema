@@ -73,11 +73,12 @@ A good branch name is the one that is related to the change you want to make.
 Do not get attached to her too much - it will be deleted after merging to master.
 
 3. #### Make some changes
-After (or even before) you write some new classes/methods, remember to write unit / integration tests and run them using:
+While writing new classes/methods, remember to write unit / integration tests and run them using:
 ```sh
 ./mvnw verify
 ```
 You will not be able to deliver your changes to the master until each test passes and is stable.
+Also remember about running impsort:sort after making changes to make sure every import is sorted.
 
 4. #### Create a commit
 Add your changes to stage and commit them:
@@ -105,12 +106,14 @@ git push --set-upstream <your-branch-name>
 ```
 After that CI will test your change. Then you have to create Pull request, and assign another dev to provide you a review.
 If review is positive, then you can merge your change with master or reviewer will do that for you.
+If it is not positive, then come back to code, create new patch and commit it.  
+(All commits will be squashed before merging to master branch).
 
 ### Continuous integration
 
 There is a control integration named CircleCI set up for this project. It tests all branches, so after your push
-there will be a run going in the background. After some time you will notice a :heavy_check_mark: if your
-build was successful or :x: if it failed. You can click on it to get more information about tests that failed or
+there will be a run going in the background. After some time you will notice a :heavy_check_mark: - if your
+build was successful or :x: - if it failed. You can click on it to get more information about tests that failed or
 some information about test coverage.
 
 ### Database uml
