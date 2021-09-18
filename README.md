@@ -73,11 +73,12 @@ A good branch name is the one that is related to the change you want to make.
 Do not get attached to her too much - it will be deleted after merging to master.
 
 3. #### Make some changes
-After (or even before) you write some new classes/methods, remember to write unit / integration tests and run them using:
+While writing new classes/methods, remember to write unit / integration tests and run them using:
 ```sh
 ./mvnw verify
 ```
 You will not be able to deliver your changes to the master until each test passes and is stable.
+Also remember about running impsort:sort after making changes to make sure every import is sorted.
 
 4. #### Create a commit
 Add your changes to stage and commit them:

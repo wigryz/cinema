@@ -19,11 +19,11 @@ jobs:
           key: cinema-backend-{{ checksum "pom.xml" }}
 
       - run:
-          name: Verify (unit => build => integration )
+          name: Verifying (unit => build => integration)
           command: ./mvnw verify
 
       - run:
-          name: Coverage printout
+          name: Printing code coverage
           when: on_success
           command: |
             awk -F, \
@@ -43,6 +43,10 @@ jobs:
                  printf "COMPLEXITY COVERAGE\n"; \
                  printf "%6d / %6d = %4.2f%% complexities covered\n", comp_cov, complexity, complexity ? 100*comp_cov/complexity : 0; }' \
               target/coverage_reports/jacoco.csv
+
+      - run:
+          name: Checking imports
+          command: ./mvnw impsort:check
 
       - store_test_results:
           name: Uploading unit test results
