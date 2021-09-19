@@ -19,7 +19,7 @@ jobs:
           key: cinema-backend-{{ checksum "pom.xml" }}
 
       - run:
-          name: Verifying (unit => build => integration)
+          name: Verifying (build => unit => integration)
           command: ./mvnw verify
 
       - run:
