@@ -45,7 +45,13 @@ jobs:
               target/coverage_reports/jacoco.csv
 
       - run:
-          name: Checking imports
+          name: Validating formatting
+          when: on_success
+          command: ./mvnw formatter:validate
+
+      - run:
+          name: Validating imports
+          when: on_success
           command: ./mvnw impsort:check
 
       - store_test_results:
