@@ -10,11 +10,11 @@ Link for [github repository][repo].
 This project is developed by [jlitewka99][jlitewka99] and [wigryz][wigryz].
 
 ## Features
-
+TODO
 ## Technologies
-
+TODO
 ## Plugins
-
+TODO
 ## Try out our application!
 
 To start using cinema-backend you need to have java 16 installed.  
@@ -86,7 +86,7 @@ git push --set-upstream <your-branch-name>
 After that CI will test your change. Then you have to create Pull request, and assign another dev to provide you a review.
 If review is positive, then you can merge your change with master or reviewer will do that for you.
 If it is not positive, then come back to code, create new patch and commit it.  
-(All commits will be squashed before merging to master branch).
+(All commits will be squashed into one before merging to master branch).
 
 ### Continuous integration
 
@@ -95,15 +95,15 @@ there will be a run going in the background. After some time you will notice a :
 build was successful or :x: - if it failed. You can click on it to get more information about tests that failed or
 some information about test coverage.
 
+What does our CI do:
+* build application,
+* run unit & integration tests,
+* printing out code coverage,
+* validate formatting and imports.
+
 ### Database
 
 ![database_schema](./resources/cinema-db_schema.jpg)
-
-## License
-
-License? Just take it and go!
-
-**Free Software, Hell Yeah!**
 
 [//]: # (HERE YOU CAN ADD MORE MAGIC LINKS])
 [repo]: <https://github.com/wigryz/cinema-backend>
