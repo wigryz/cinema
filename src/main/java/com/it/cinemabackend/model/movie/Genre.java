@@ -1,13 +1,12 @@
 package com.it.cinemabackend.model.movie;
 
 import com.it.cinemabackend.model.BaseEntity;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "genre")
@@ -15,10 +14,7 @@ public class Genre extends BaseEntity {
 
     private String name;
 
-    @ManyToMany(
-        mappedBy = "genres",
-        cascade = CascadeType.ALL
-    )
+    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
     private Set<Movie> movies = new HashSet<>();
 
     public String getName() {

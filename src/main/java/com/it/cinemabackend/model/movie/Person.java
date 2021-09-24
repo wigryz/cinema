@@ -1,12 +1,11 @@
 package com.it.cinemabackend.model.movie;
 
 import com.it.cinemabackend.model.BaseEntity;
-
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.Set;
 
 @Entity
 @Table(name = "person")
@@ -18,16 +17,10 @@ public class Person extends BaseEntity {
 
     private String lastName;
 
-    @ManyToMany(
-        mappedBy = "directors",
-        cascade = CascadeType.ALL
-    )
+    @ManyToMany(mappedBy = "directors", cascade = CascadeType.ALL)
     Set<Movie> moviesAsDirector;
 
-    @ManyToMany(
-        mappedBy = "actors",
-        cascade = CascadeType.ALL
-    )
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
     Set<Movie> moviesAsActor;
 
     public String getFirstName() {
