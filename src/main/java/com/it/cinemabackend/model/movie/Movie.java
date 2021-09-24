@@ -28,35 +28,22 @@ public class Movie extends BaseEntity {
 
     private Integer ageRestriction;
 
-    @OneToMany(
-        mappedBy = "movie",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Showtime> showtimes;
 
     @ManyToMany
-    @JoinTable(
-        name = "movie_genre",
-        joinColumns = {@JoinColumn(name = "genre_id")},
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @JoinTable(name = "movie_genre", joinColumns = {
+            @JoinColumn(name = "genre_id") }, inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Genre> genres;
 
     @ManyToMany
-    @JoinTable(
-        name = "movie_director",
-        joinColumns = {@JoinColumn(name = "person_id")},
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @JoinTable(name = "movie_director", joinColumns = {
+            @JoinColumn(name = "person_id") }, inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Person> directors;
 
     @ManyToMany
-    @JoinTable(
-        name = "movie_actor",
-        joinColumns = {@JoinColumn(name = "person_id")},
-        inverseJoinColumns = @JoinColumn(name = "movie_id")
-    )
+    @JoinTable(name = "movie_actor", joinColumns = {
+            @JoinColumn(name = "person_id") }, inverseJoinColumns = @JoinColumn(name = "movie_id"))
     private Set<Person> actors;
 
     public String getTitle() {
