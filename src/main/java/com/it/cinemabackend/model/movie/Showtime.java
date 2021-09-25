@@ -2,6 +2,7 @@ package com.it.cinemabackend.model.movie;
 
 import com.it.cinemabackend.model.BaseEntity;
 import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,19 +15,19 @@ import javax.persistence.Table;
 @Table(name = "showtime")
 public class Showtime extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @ManyToOne
+    @Column(name = "datetime", nullable = false)
+    private LocalDateTime dateTime;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, optional = false)
     @JoinColumn(name = "technology_id")
     private Technology technology;
 
     @Enumerated(EnumType.STRING)
     private Language language;
-
-    @Column(name = "datetime")
-    private LocalDateTime dateTime;
 
     public Movie getMovie() {
         return movie;
@@ -34,6 +35,14 @@ public class Showtime extends BaseEntity {
 
     public void setMovie(Movie movie) {
         this.movie = movie;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public Technology getTechnology() {
@@ -50,13 +59,5 @@ public class Showtime extends BaseEntity {
 
     public void setLanguage(Language language) {
         this.language = language;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 }
