@@ -2,6 +2,7 @@ package com.it.cinemabackend.model.movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +33,7 @@ class GenreTest {
     void getSetMovies() {
         Movie movie1 = new Movie();
         Movie movie2 = new Movie();
-        genre.setMovies(Set.of(movie1, movie2));
+        genre.setMovies(List.of(movie1, movie2));
 
         assertEquals(2, genre.getMovies().size());
     }

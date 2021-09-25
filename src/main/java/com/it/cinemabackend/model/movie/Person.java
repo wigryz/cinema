@@ -1,7 +1,8 @@
 package com.it.cinemabackend.model.movie;
 
 import com.it.cinemabackend.model.BaseEntity;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -17,11 +18,13 @@ public class Person extends BaseEntity {
 
     private String lastName;
 
+    private String portraitPath;
+
     @ManyToMany(mappedBy = "directors", cascade = CascadeType.ALL)
-    Set<Movie> moviesAsDirector;
+    List<Movie> moviesAsDirector = new ArrayList<>();
 
     @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
-    Set<Movie> moviesAsActor;
+    List<Movie> moviesAsActor = new ArrayList<>();
 
     public String getFirstName() {
         return firstName;
@@ -47,19 +50,28 @@ public class Person extends BaseEntity {
         this.lastName = lastName;
     }
 
-    public Set<Movie> getMoviesAsDirector() {
+    public String getPortraitPath() {
+        return portraitPath;
+    }
+
+    public void setPortraitPath(String portraitPath) {
+        this.portraitPath = portraitPath;
+    }
+
+    public List<Movie> getMoviesAsDirector() {
         return moviesAsDirector;
     }
 
-    public void setMoviesAsDirector(Set<Movie> moviesAsDirector) {
+    public void setMoviesAsDirector(List<Movie> moviesAsDirector) {
         this.moviesAsDirector = moviesAsDirector;
     }
 
-    public Set<Movie> getMoviesAsActor() {
+    public List<Movie> getMoviesAsActor() {
         return moviesAsActor;
     }
 
-    public void setMoviesAsActor(Set<Movie> moviesAsActor) {
+    public void setMoviesAsActor(List<Movie> moviesAsActor) {
         this.moviesAsActor = moviesAsActor;
     }
+
 }

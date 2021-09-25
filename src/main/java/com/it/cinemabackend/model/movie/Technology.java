@@ -1,7 +1,7 @@
 package com.it.cinemabackend.model.movie;
 
 import com.it.cinemabackend.model.BaseEntity;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,7 +13,7 @@ public class Technology extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "technology")
-    private Set<Showtime> showtimes;
+    private List<Showtime> showtimes;
 
     public String getName() {
         return name;
@@ -23,11 +23,11 @@ public class Technology extends BaseEntity {
         this.name = name;
     }
 
-    public Set<Showtime> getShowtimes() {
+    public List<Showtime> getShowtimes() {
         return showtimes;
     }
 
-    public void setShowtimes(Set<Showtime> showtimes) {
+    public void setShowtimes(List<Showtime> showtimes) {
         this.showtimes = showtimes;
     }
 }

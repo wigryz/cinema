@@ -2,6 +2,7 @@ package com.it.cinemabackend.model.movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,16 +44,23 @@ class PersonTest {
     }
 
     @Test
+    void getSetPortraitPath() {
+        String portraitPath = "~/path/to/portrait";
+        person.setPortraitPath(portraitPath);
+        assertEquals(portraitPath, person.getPortraitPath());
+    }
+
+    @Test
     void getSetMoviesAsDirector() {
         Movie movie = new Movie();
-        person.setMoviesAsDirector(Set.of(movie));
+        person.setMoviesAsDirector(List.of(movie));
         assertEquals(1, person.getMoviesAsDirector().size());
     }
 
     @Test
     void getSetMoviesAsActor() {
         Movie movie = new Movie();
-        person.setMoviesAsActor(Set.of(movie));
+        person.setMoviesAsActor(List.of(movie));
         assertEquals(1, person.getMoviesAsActor().size());
     }
 }

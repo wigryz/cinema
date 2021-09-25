@@ -2,6 +2,7 @@ package com.it.cinemabackend.model.movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +33,7 @@ class TechnologyTest {
     void getSetMovies() {
         Showtime showtime1 = new Showtime();
         Showtime showtime2 = new Showtime();
-        technology.setShowtimes(Set.of(showtime1, showtime2));
+        technology.setShowtimes(List.of(showtime1, showtime2));
         assertEquals(2, technology.getShowtimes().size());
     }
 
