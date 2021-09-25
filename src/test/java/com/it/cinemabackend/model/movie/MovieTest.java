@@ -2,6 +2,7 @@ package com.it.cinemabackend.model.movie;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,13 @@ class MovieTest {
         String title = "title";
         movie.setTitle(title);
         assertEquals(title, movie.getTitle());
+    }
+
+    @Test
+    void getSetShortDescription() {
+        String shortDescription = "short description";
+        movie.setShortDescription(shortDescription);
+        assertEquals(shortDescription, movie.getShortDescription());
     }
 
     @Test
@@ -64,30 +72,44 @@ class MovieTest {
     }
 
     @Test
+    void getSetPosterPath() {
+        String posterPath = "~/path/to/poster";
+        movie.setPosterPath(posterPath);
+        assertEquals(posterPath, movie.getPosterPath());
+    }
+
+    @Test
+    void getSetImdbId() {
+        String imdbId = "tt123456";
+        movie.setImdbId(imdbId);
+        assertEquals(imdbId, movie.getImdbId());
+    }
+
+    @Test
     void getSetShowtimes() {
         Showtime showtime = new Showtime();
-        movie.setShowtimes(Set.of(showtime));
+        movie.setShowtimes(List.of(showtime));
         assertEquals(1, movie.getShowtimes().size());
     }
 
     @Test
     void getSetGenres() {
         Genre genre = new Genre();
-        movie.setGenres(Set.of(genre));
+        movie.setGenres(List.of(genre));
         assertEquals(1, movie.getGenres().size());
     }
 
     @Test
     void getSetDirectors() {
         Person person = new Person();
-        movie.setDirectors(Set.of(person));
+        movie.setDirectors(List.of(person));
         assertEquals(1, movie.getDirectors().size());
     }
 
     @Test
     void getSetActors() {
         Person person = new Person();
-        movie.setActors(Set.of(person));
+        movie.setActors(List.of(person));
         assertEquals(1, movie.getActors().size());
     }
 }
