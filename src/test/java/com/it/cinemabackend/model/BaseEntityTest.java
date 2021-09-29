@@ -28,8 +28,7 @@ class BaseEntityTest {
     @ParameterizedTest
     @MethodSource("getSetData")
     void getSetId(long id) {
-        BaseEntity baseEntity = new BaseEntity();
-        baseEntity.setId(id);
+        BaseEntity baseEntity = new BaseEntity(id);
         assertEquals(id, baseEntity.getId());
     }
 

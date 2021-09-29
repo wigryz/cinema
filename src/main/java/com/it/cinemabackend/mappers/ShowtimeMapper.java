@@ -20,5 +20,4 @@ public abstract class ShowtimeMapper {
     protected String mapGenreToString(Genre genre) {
         return genre.getName();
     }
-
 }
