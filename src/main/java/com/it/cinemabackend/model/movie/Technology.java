@@ -5,7 +5,15 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "technology")
 public class Technology extends BaseEntity {
@@ -14,20 +22,4 @@ public class Technology extends BaseEntity {
 
     @OneToMany(mappedBy = "technology")
     private List<Showtime> showtimes;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Showtime> getShowtimes() {
-        return showtimes;
-    }
-
-    public void setShowtimes(List<Showtime> showtimes) {
-        this.showtimes = showtimes;
-    }
 }
