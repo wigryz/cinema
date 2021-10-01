@@ -8,6 +8,8 @@ import com.it.cinemabackend.services.ShowtimeService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/showtimes")
 public class ShowtimeController {
+
+    Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final ShowtimeService showtimeService;
     private final ShowtimeMapper showtimeMapper;
@@ -48,7 +52,8 @@ public class ShowtimeController {
     @PostMapping("/new")
     public ResponseEntity<String> addShowtime(@RequestBody ShowtimeNewDTO showtimeNewDTO) {
         Showtime showtime = showtimeMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
-        showtimeService.save(showtime);
+        showtime = showtimeService.save(showtime);
+        log.info("Added new showtime object to database: {}", showtime);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -36,4 +36,15 @@ public class Showtime extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private Language language;
+
+    @Override
+    public String toString() {
+        return "Showtime{" +
+            "id='" + getId() + '\'' +
+            "movie=" + movie +
+            ", dateTime=" + dateTime +
+            ", technology=" + technology +
+            ", language=" + language +
+            '}';
+    }
 }

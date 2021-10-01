@@ -24,4 +24,12 @@ public class Technology extends BaseEntity {
 
     @OneToMany(mappedBy = "technology")
     private List<Showtime> showtimes;
+
+    @Override
+    public String toString() {
+        return "Technology{" +
+            "id='" + getId() + '\'' +
+            "name='" + name + '\'' +
+            '}';
+    }
 }

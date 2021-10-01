@@ -36,4 +36,15 @@ public class Person extends BaseEntity {
 
     @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
     List<Movie> moviesAsActor = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Person{" +
+            "id='" + getId() + '\'' +
+            "firstName='" + firstName + '\'' +
+            ", secondName='" + secondName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", portraitPath='" + portraitPath + '\'' +
+            '}';
+    }
 }
