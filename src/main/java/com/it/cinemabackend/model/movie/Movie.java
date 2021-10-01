@@ -59,4 +59,23 @@ public class Movie extends BaseEntity {
     @JoinTable(name = "movie_actor", joinColumns = {
             @JoinColumn(name = "movie_id") }, inverseJoinColumns = @JoinColumn(name = "person_id"))
     private List<Person> actors;
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+            "id='" + getId() + '\'' +
+            "title='" + title + '\'' +
+            ", shortDescription='" + shortDescription + '\'' +
+            ", description='" + description + '\'' +
+            ", yearOfProduction=" + yearOfProduction +
+            ", duration=" + duration +
+            ", additionalInfo='" + additionalInfo + '\'' +
+            ", ageRestriction=" + ageRestriction +
+            ", posterPath='" + posterPath + '\'' +
+            ", imdbId='" + imdbId + '\'' +
+            ", genres=" + genres.stream().map(BaseEntity::getId).toList() +
+            ", directors=" + directors.stream().map(BaseEntity::getId).toList() +
+            ", actors=" + actors.stream().map(BaseEntity::getId).toList() +
+            '}';
+    }
 }

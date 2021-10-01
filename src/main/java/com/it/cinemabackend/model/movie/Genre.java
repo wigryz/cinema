@@ -26,4 +26,12 @@ public class Genre extends BaseEntity {
 
     @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
     private List<Movie> movies = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Genre{" +
+            "id='" + getId() + '\'' +
+            "name='" + name + '\'' +
+            '}';
+    }
 }
