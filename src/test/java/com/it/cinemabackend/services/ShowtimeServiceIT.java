@@ -1,4 +1,4 @@
-package com.it.cinemabackend.integration;
+package com.it.cinemabackend.services;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,9 +6,6 @@ import com.it.cinemabackend.model.movie.Movie;
 import com.it.cinemabackend.model.movie.Showtime;
 import com.it.cinemabackend.model.movie.Technology;
 import com.it.cinemabackend.repository.ShowtimeRepository;
-import com.it.cinemabackend.services.MovieService;
-import com.it.cinemabackend.services.ShowtimeService;
-import com.it.cinemabackend.services.TechnologyService;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -21,8 +18,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 @DataJpaTest
-@ComponentScan(basePackageClasses =
-    {ShowtimeRepository.class, ShowtimeService.class, TechnologyService.class})
+@ComponentScan(basePackageClasses = { ShowtimeRepository.class, ShowtimeService.class, TechnologyService.class })
 class ShowtimeServiceIT {
 
     @Autowired
@@ -43,33 +39,28 @@ class ShowtimeServiceIT {
     // --- more like unit tests
     @Test
     void failSavingNullObjectTest() {
-        Showtime showtime = null;
-        assertThrows(InvalidDataAccessApiUsageException.class,
-            () -> showtimeService.save(showtime));
+        assertThrows(InvalidDataAccessApiUsageException.class, () -> showtimeService.save(null));
     }
 
     @Test
     void failSavingShowtimeWithNullMovieTest() {
         Showtime showtime = new Showtime();
         showtime.setMovie(null);
-        assertThrows(DataIntegrityViolationException.class,
-            () -> showtimeService.save(showtime));
+        assertThrows(DataIntegrityViolationException.class, () -> showtimeService.save(showtime));
     }
 
     @Test
     void failSavingShowtimeWithNullTechnologyTest() {
         Showtime showtime = new Showtime();
         showtime.setTechnology(null);
-        assertThrows(DataIntegrityViolationException.class,
-            () -> showtimeService.save(showtime));
+        assertThrows(DataIntegrityViolationException.class, () -> showtimeService.save(showtime));
     }
 
     @Test
     void failSavingShowtimeWithNullDateTest() {
         Showtime showtime = new Showtime();
         showtime.setDateTime(null);
-        assertThrows(DataIntegrityViolationException.class,
-            () -> showtimeService.save(showtime));
+        assertThrows(DataIntegrityViolationException.class, () -> showtimeService.save(showtime));
     }
     // ---
 
@@ -112,7 +103,6 @@ class ShowtimeServiceIT {
         showtimeService.save(showtime2);
         List<Showtime> currentShowtimes = showtimeService.findCurrent();
 
-        assertTrue(!currentShowtimes.contains(showtime1) &&
-            !currentShowtimes.contains(showtime2));
+        assertTrue(!currentShowtimes.contains(showtime1) && !currentShowtimes.contains(showtime2));
     }
 }

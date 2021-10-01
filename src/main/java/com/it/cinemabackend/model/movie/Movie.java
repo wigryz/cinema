@@ -3,6 +3,7 @@ package com.it.cinemabackend.model.movie;
 import com.it.cinemabackend.model.BaseEntity;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -22,6 +23,7 @@ import lombok.Setter;
 @Table(name = "movie")
 public class Movie extends BaseEntity {
 
+    @Column(nullable = false)
     private String title;
 
     private String shortDescription;

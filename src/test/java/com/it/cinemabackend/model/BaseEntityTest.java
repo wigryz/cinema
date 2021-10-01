@@ -19,10 +19,7 @@ class BaseEntityTest {
     }
 
     public static Object[][] getSetData() {
-        return new Object[][] {
-            {0L},
-            {Long.MAX_VALUE}
-        };
+        return new Object[][] { { 0L }, { Long.MAX_VALUE } };
     }
 
     @ParameterizedTest
