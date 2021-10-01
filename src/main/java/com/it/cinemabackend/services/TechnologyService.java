@@ -15,9 +15,17 @@ public class TechnologyService {
         this.technologyRepository = technologyRepository;
     }
 
+    public Technology findById(Long id) {
+        return technologyRepository.findById(id).orElseThrow();
+    }
+
     public List<Technology> findAll() {
         List<Technology> technologies = new ArrayList<>();
         technologyRepository.findAll().forEach(technologies::add);
         return technologies;
+    }
+
+    public Technology save(Technology technology) {
+        return technologyRepository.save(technology);
     }
 }

@@ -15,6 +15,10 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
+    public Movie findById(Long id) {
+        return movieRepository.findById(id).orElseThrow();
+    }
+
     public List<Movie> findAll() {
         List<Movie> movies = new ArrayList<>();
         movieRepository.findAll().forEach(movies::add);
