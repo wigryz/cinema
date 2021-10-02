@@ -8,7 +8,9 @@ import com.it.cinemabackend.services.MovieService;
 import com.it.cinemabackend.services.TechnologyService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
+@Component // just to get rid of "no bean of type ... warning"
 @Mapper(componentModel = "spring", uses = {MovieService.class, TechnologyService.class})
 public abstract class ShowtimeMapper {
 
