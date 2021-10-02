@@ -1,13 +1,17 @@
-package com.it.cinemabackend.controllers;
+package com.it.cinemabackend.controller;
 
 import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.model.domain.Movie;
+import com.it.cinemabackend.model.domain.Showtime;
+import com.it.cinemabackend.model.domain.Technology;
 import com.it.cinemabackend.model.dto.MovieShortDTO;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
 import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
-import com.it.cinemabackend.model.movie.Movie;
-import com.it.cinemabackend.model.movie.Showtime;
+import com.it.cinemabackend.model.dto.TechnologyDTO;
+import com.it.cinemabackend.model.dto.TechnologyNewDTO;
 import com.it.cinemabackend.services.ShowtimeService;
+import com.it.cinemabackend.services.TechnologyService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -31,11 +35,13 @@ public class ShowtimeController {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final ShowtimeService showtimeService;
+    private final TechnologyService technologyService;
     private final ModelMapper modelMapper;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_DATE;
 
-    public ShowtimeController(ShowtimeService showtimeService, ModelMapper modelMapper) {
+    public ShowtimeController(ShowtimeService showtimeService, TechnologyService technologyService, ModelMapper modelMapper) {
         this.showtimeService = showtimeService;
+        this.technologyService = technologyService;
         this.modelMapper = modelMapper;
     }
 
@@ -83,6 +89,21 @@ public class ShowtimeController {
         showtime = showtimeService.save(showtime);
         log.info("Added new showtime object to database: {}", showtime);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/technologies/all")
+    public ResponseEntity<List<TechnologyDTO>> getAllTechnologies() {
+        List<TechnologyDTO> technologyDTOs = technologyService.findAll().stream()
+            .map(modelMapper::technologyToTechnologyDTO)
+            .toList();
+        return new ResponseEntity<>(technologyDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/technologies/new")
+    public ResponseEntity<Long> addTechnology(@RequestBody TechnologyNewDTO technologyNewDTO) {
+        Technology technology =
+            technologyService.save(modelMapper.technologyNewDTOToTechnology(technologyNewDTO));
+        return new ResponseEntity<>(technology.getId(), HttpStatus.OK);
     }
 
     private Map<MovieShortDTO, List<ShowtimeGroupedDTO>>

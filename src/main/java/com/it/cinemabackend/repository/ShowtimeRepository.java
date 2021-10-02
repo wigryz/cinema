@@ -1,6 +1,6 @@
 package com.it.cinemabackend.repository;
 
-import com.it.cinemabackend.model.movie.Showtime;
+import com.it.cinemabackend.model.domain.Showtime;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;

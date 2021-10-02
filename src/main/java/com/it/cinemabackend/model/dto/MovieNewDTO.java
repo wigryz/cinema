@@ -12,9 +12,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class MovieDTO {
+public class MovieNewDTO {
 
-    private Long id;
     private String title;
     private String shortDescription;
     private String description;
@@ -23,7 +22,7 @@ public class MovieDTO {
     private Integer ageRestriction;
     private String posterPath;
     private String imdbId;
-    private List<GenreDTO> genres;
-    private List<PersonDTO> directors;
-    private List<PersonDTO> actors;
+    private List<Long> genres;
+    private List<Long> directors;
+    private List<Long> actors;
 }

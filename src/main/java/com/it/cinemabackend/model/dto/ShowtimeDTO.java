@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class ShowtimeDTO {
 
-    private Integer id;
-    private Integer movieId;
+    private Long id;
+    private Long movieId;
     private String title;
     private List<String> genres;
     private String ageRestriction;

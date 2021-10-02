@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class MovieShortDTO {
 
-    private Integer movieId;
+    private Integer id;
     private String title;
     private List<String> genres;
     private String ageRestriction;

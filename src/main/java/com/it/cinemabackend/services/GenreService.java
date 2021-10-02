@@ -1,8 +1,7 @@
 package com.it.cinemabackend.services;
 
-import com.it.cinemabackend.model.movie.Genre;
-import com.it.cinemabackend.repositories.GenreRepository;
-import java.util.ArrayList;
+import com.it.cinemabackend.model.domain.Genre;
+import com.it.cinemabackend.repository.GenreRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +14,11 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
-
     public List<Genre> findAll() {
-        List<Genre> genres = new ArrayList<>();
-        genreRepository.findAll().forEach(genres::add);
-        return genres;
+        return genreRepository.findAll();
+    }
+
+    public Genre save(Genre genre) {
+        return genreRepository.save(genre);
     }
 }
