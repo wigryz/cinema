@@ -35,22 +35,23 @@ public class ShowtimeController {
     }
 
     @GetMapping("/current")
-    public ResponseEntity<List<ShowtimeDTO>> getCurrentShowtimes() {
+    public ResponseEntity<List<ShowtimeDTO>> getCurrent() {
         List<ShowtimeDTO> showtimeDTOs = showtimeService.findCurrent().stream()
-                .map(showtimeMapper::showtimeToShowtimeDTO).toList();
+            .map(showtimeMapper::showtimeToShowtimeDTO)
+            .toList();
         return new ResponseEntity<>(showtimeDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/of-date/{dateStr}")
-    public ResponseEntity<List<ShowtimeDTO>> getShowtimesForTheDay(@PathVariable String dateStr) {
+    public ResponseEntity<List<ShowtimeDTO>> getOfDate(@PathVariable String dateStr) {
         LocalDate date = LocalDate.parse(dateStr, dateFormatter);
         List<ShowtimeDTO> showtimeDTOs = showtimeService.findByDate(date).stream()
-                .map(showtimeMapper::showtimeToShowtimeDTO).toList();
+            .map(showtimeMapper::showtimeToShowtimeDTO).toList();
         return new ResponseEntity<>(showtimeDTOs, HttpStatus.OK);
     }
 
     @PostMapping("/new")
-    public ResponseEntity<String> addShowtime(@RequestBody ShowtimeNewDTO showtimeNewDTO) {
+    public ResponseEntity<String> add(@RequestBody ShowtimeNewDTO showtimeNewDTO) {
         Showtime showtime = showtimeMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
         showtime = showtimeService.save(showtime);
         log.info("Added new showtime object to database: {}", showtime);
