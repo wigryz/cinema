@@ -34,8 +34,6 @@ public class Movie extends BaseEntity {
 
     private Integer duration;
 
-    private String additionalInfo;
-
     private Integer ageRestriction;
 
     private String posterPath;
@@ -69,7 +67,6 @@ public class Movie extends BaseEntity {
             ", description='" + description + '\'' +
             ", yearOfProduction=" + yearOfProduction +
             ", duration=" + duration +
-            ", additionalInfo='" + additionalInfo + '\'' +
             ", ageRestriction=" + ageRestriction +
             ", posterPath='" + posterPath + '\'' +
             ", imdbId='" + imdbId + '\'' +

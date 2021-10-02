@@ -3,7 +3,7 @@ INSERT INTO `genre` (id, name) VALUES (1,'Genre1'),(2,'Genre2'),(3,'Genre3'),(4,
 /*!40000 ALTER TABLE `genre` ENABLE KEYS */;
 
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` (id, title, short_description, description, year_of_production, duration, additional_info, age_restriction, poster_path) VALUES (1,'Movie1','Short description1','Description1',2001,50,'Additional info1',5,'resources/posters/poster1.jpg'),(2,'Movie2','Short description2','Description2',2002,60,'Additional info2',13,'resources/posters/poster2.jpg'),(3,'Movie3','Short description3','Description3',2003,70,'Additional info3',15,'resources/posters/poster3.jpg'),(4,'Movie4','Short description4','Description4',2004,80,'Additional info4',18,'resources/posters/poster4.jpg'),(5,'Movie5','Short description5','Description5',2005,90,'Additional info5',21,'resources/posters/poster5.jpg');
+INSERT INTO `movie` (id, title, short_description, description, year_of_production, duration, age_restriction, poster_path) VALUES (1,'Movie1','Short description1','Description1',2001,50,5,'resources/posters/poster1.jpg'),(2,'Movie2','Short description2','Description2',2002,60,13,'resources/posters/poster2.jpg'),(3,'Movie3','Short description3','Description3',2003,70,15,'resources/posters/poster3.jpg'),(4,'Movie4','Short description4','Description4',2004,80,18,'resources/posters/poster4.jpg'),(5,'Movie5','Short description5','Description5',2005,90,21,'resources/posters/poster5.jpg');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
