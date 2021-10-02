@@ -2,13 +2,16 @@ package com.it.cinemabackend.mappers;
 
 import com.it.cinemabackend.model.dto.GenreDTO;
 import com.it.cinemabackend.model.dto.MovieDTO;
+import com.it.cinemabackend.model.dto.MovieShortDTO;
 import com.it.cinemabackend.model.dto.PersonDTO;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
+import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
 import com.it.cinemabackend.model.movie.Genre;
 import com.it.cinemabackend.model.movie.Movie;
 import com.it.cinemabackend.model.movie.Person;
 import com.it.cinemabackend.model.movie.Showtime;
+import com.it.cinemabackend.model.movie.Technology;
 import com.it.cinemabackend.services.MovieService;
 import com.it.cinemabackend.services.TechnologyService;
 import org.mapstruct.Mapper;
@@ -34,6 +37,14 @@ public abstract class ModelMapper {
     @Mapping(source = "language", target = "language")
     public abstract Showtime showtimeNewDTOToShowtime(ShowtimeNewDTO showtimeNewDTO);
 
+    @Mapping(source = "showtime.id", target = "showtimeId")
+    @Mapping(source = "showtime.dateTime", target = "dateTime")
+    @Mapping(source = "showtime.technology", target = "technology")
+    @Mapping(source = "showtime.language", target = "language")
+    public abstract ShowtimeGroupedDTO showtimeToShowtimeGroupedDTO(Showtime showtime);
+
+    public abstract MovieShortDTO movieToMovieShortDTO(Movie movie);
+
     public abstract PersonDTO personToPersonDTO(Person person);
 
     public abstract MovieDTO movieToMovieDTO(Movie movie);
@@ -42,6 +53,9 @@ public abstract class ModelMapper {
 
     protected String mapGenreToString(Genre genre) {
         return genre.getName();
+    }
+    protected String mapTechnologyToString(Technology technology) {
+        return technology.getName();
     }
 
 }

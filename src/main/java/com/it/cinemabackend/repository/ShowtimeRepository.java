@@ -9,5 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ShowtimeRepository extends CrudRepository<Showtime, Long> {
 
+    List<Showtime> findAll();
+
+    List<Showtime> findByMovieId(Long movieId);
+
     List<Showtime> findShowtimeByDateTimeBetween(LocalDateTime dateTime, LocalDateTime dateTime2);
 }
