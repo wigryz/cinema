@@ -1,6 +1,6 @@
 package com.it.cinemabackend.controllers;
 
-import com.it.cinemabackend.mappers.ShowtimeMapper;
+import com.it.cinemabackend.mappers.ModelMapper;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
 import com.it.cinemabackend.model.movie.Showtime;
@@ -26,18 +26,18 @@ public class ShowtimeController {
     Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final ShowtimeService showtimeService;
-    private final ShowtimeMapper showtimeMapper;
+    private final ModelMapper modelMapper;
     DateTimeFormatter dateFormatter = DateTimeFormatter.ISO_DATE;
 
-    public ShowtimeController(ShowtimeService showtimeService, ShowtimeMapper showtimeMapper) {
+    public ShowtimeController(ShowtimeService showtimeService, ModelMapper modelMapper) {
         this.showtimeService = showtimeService;
-        this.showtimeMapper = showtimeMapper;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/current")
     public ResponseEntity<List<ShowtimeDTO>> getCurrent() {
         List<ShowtimeDTO> showtimeDTOs = showtimeService.findCurrent().stream()
-            .map(showtimeMapper::showtimeToShowtimeDTO)
+            .map(modelMapper::showtimeToShowtimeDTO)
             .toList();
         return new ResponseEntity<>(showtimeDTOs, HttpStatus.OK);
     }
@@ -46,13 +46,13 @@ public class ShowtimeController {
     public ResponseEntity<List<ShowtimeDTO>> getOfDate(@PathVariable String dateStr) {
         LocalDate date = LocalDate.parse(dateStr, dateFormatter);
         List<ShowtimeDTO> showtimeDTOs = showtimeService.findByDate(date).stream()
-            .map(showtimeMapper::showtimeToShowtimeDTO).toList();
+            .map(modelMapper::showtimeToShowtimeDTO).toList();
         return new ResponseEntity<>(showtimeDTOs, HttpStatus.OK);
     }
 
     @PostMapping("/new")
     public ResponseEntity<String> add(@RequestBody ShowtimeNewDTO showtimeNewDTO) {
-        Showtime showtime = showtimeMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
+        Showtime showtime = modelMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
         showtime = showtimeService.save(showtime);
         log.info("Added new showtime object to database: {}", showtime);
         return new ResponseEntity<>(HttpStatus.OK);

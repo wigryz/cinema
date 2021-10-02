@@ -1,6 +1,6 @@
 package com.it.cinemabackend.controllers;
 
-import com.it.cinemabackend.mappers.PersonMapper;
+import com.it.cinemabackend.mappers.ModelMapper;
 import com.it.cinemabackend.model.dto.PersonDTO;
 import com.it.cinemabackend.services.PersonService;
 import java.util.List;
@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PersonController {
 
     private final PersonService personService;
-    private final PersonMapper personMapper;
+    private final ModelMapper modelMapper;
 
-    public PersonController(PersonService personService, PersonMapper personMapper) {
+    public PersonController(PersonService personService, ModelMapper modelMapper) {
         this.personService = personService;
-        this.personMapper = personMapper;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonDTO>> getAll() {
         List<PersonDTO> personDTOs =
             personService.findAll().stream()
-                .map(personMapper::personToPersonDTO)
+                .map(modelMapper::personToPersonDTO)
                 .toList();
         return new ResponseEntity<>(personDTOs, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonDTO> getById(@PathVariable Long id) {
-        PersonDTO personDTO = personMapper
+        PersonDTO personDTO = modelMapper
             .personToPersonDTO(personService.findById(id));
         return new ResponseEntity<>(personDTO, HttpStatus.OK);
     }
