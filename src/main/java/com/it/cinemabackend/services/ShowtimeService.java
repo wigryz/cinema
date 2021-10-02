@@ -4,7 +4,6 @@ import com.it.cinemabackend.model.movie.Showtime;
 import com.it.cinemabackend.repository.ShowtimeRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +35,11 @@ public class ShowtimeService {
         return showtimeRepository.findShowtimeByDateTimeBetween(startOfDay, endOfDay);
     }
 
+    public List<Showtime> findByMovieId(Long movieId) {
+        return showtimeRepository.findByMovieId(movieId);
+    }
+
     public List<Showtime> findAll() {
-        List<Showtime> showtimes = new ArrayList<>();
-        showtimeRepository.findAll().forEach(showtimes::add);
-        return showtimes;
+        return showtimeRepository.findAll();
     }
 }
