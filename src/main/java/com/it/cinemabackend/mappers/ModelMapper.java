@@ -1,17 +1,22 @@
 package com.it.cinemabackend.mappers;
 
+import com.it.cinemabackend.model.domain.Genre;
+import com.it.cinemabackend.model.domain.Movie;
+import com.it.cinemabackend.model.domain.Person;
+import com.it.cinemabackend.model.domain.Showtime;
+import com.it.cinemabackend.model.domain.Technology;
 import com.it.cinemabackend.model.dto.GenreDTO;
+import com.it.cinemabackend.model.dto.GenreNewDTO;
 import com.it.cinemabackend.model.dto.MovieDTO;
+import com.it.cinemabackend.model.dto.MovieNewDTO;
 import com.it.cinemabackend.model.dto.MovieShortDTO;
 import com.it.cinemabackend.model.dto.PersonDTO;
+import com.it.cinemabackend.model.dto.PersonNewDTO;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
 import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
-import com.it.cinemabackend.model.movie.Genre;
-import com.it.cinemabackend.model.movie.Movie;
-import com.it.cinemabackend.model.movie.Person;
-import com.it.cinemabackend.model.movie.Showtime;
-import com.it.cinemabackend.model.movie.Technology;
+import com.it.cinemabackend.model.dto.TechnologyDTO;
+import com.it.cinemabackend.model.dto.TechnologyNewDTO;
 import com.it.cinemabackend.services.MovieService;
 import com.it.cinemabackend.services.TechnologyService;
 import org.mapstruct.Mapper;
@@ -20,16 +25,22 @@ import org.springframework.stereotype.Component;
 
 @Component // just to get rid of "no bean of type ... warning"
 @Mapper(componentModel = "spring",
-    uses = {MovieService.class, TechnologyService.class})
+    uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class, MovieMapper.class})
 public abstract class ModelMapper {
 
-    @Mapping(source = "showtime.movie.id", target = "movieId")
-    @Mapping(source = "showtime.movie.title", target = "title")
-    @Mapping(source = "showtime.movie.genres", target = "genres")
-    @Mapping(source = "showtime.movie.ageRestriction", target = "ageRestriction")
-    @Mapping(source = "showtime.movie.duration", target = "duration")
-    @Mapping(source = "showtime.technology.name", target = "technology")
+    @Mapping(source = "movie.id", target = "movieId")
+    @Mapping(source = "movie.title", target = "title")
+    @Mapping(source = "movie.genres", target = "genres")
+    @Mapping(source = "movie.ageRestriction", target = "ageRestriction")
+    @Mapping(source = "movie.duration", target = "duration")
+    @Mapping(source = "technology.name", target = "technology")
     public abstract ShowtimeDTO showtimeToShowtimeDTO(Showtime showtime);
+
+    @Mapping(source = "id", target = "showtimeId")
+    @Mapping(source = "dateTime", target = "dateTime")
+    @Mapping(source = "technology", target = "technology")
+    @Mapping(source = "language", target = "language")
+    public abstract ShowtimeGroupedDTO showtimeToShowtimeGroupedDTO(Showtime showtime);
 
     @Mapping(source = "movieId", target = "movie")
     @Mapping(source = "dateTime", target = "dateTime")
@@ -37,19 +48,20 @@ public abstract class ModelMapper {
     @Mapping(source = "language", target = "language")
     public abstract Showtime showtimeNewDTOToShowtime(ShowtimeNewDTO showtimeNewDTO);
 
-    @Mapping(source = "showtime.id", target = "showtimeId")
-    @Mapping(source = "showtime.dateTime", target = "dateTime")
-    @Mapping(source = "showtime.technology", target = "technology")
-    @Mapping(source = "showtime.language", target = "language")
-    public abstract ShowtimeGroupedDTO showtimeToShowtimeGroupedDTO(Showtime showtime);
-
     public abstract MovieShortDTO movieToMovieShortDTO(Movie movie);
 
-    public abstract PersonDTO personToPersonDTO(Person person);
-
+    public abstract Movie movieNewDTOToMovie(MovieNewDTO movieNewDTO);
     public abstract MovieDTO movieToMovieDTO(Movie movie);
 
-    public abstract GenreDTO genreToGenreDTO(Genre movie);
+    public abstract PersonDTO personToPersonDTO(Person person);
+    public abstract Person personNewDTOTOPerson(PersonNewDTO personNewDTO);
+
+
+    public abstract GenreDTO genreToGenreDTO(Genre genre);
+    public abstract Genre genreNewDTOToGenre(GenreNewDTO genreNewDTO);
+
+    public abstract Technology technologyNewDTOToTechnology(TechnologyNewDTO technologyNewDTO);
+    public abstract TechnologyDTO technologyToTechnologyDTO(Technology technology);
 
     protected String mapGenreToString(Genre genre) {
         return genre.getName();
@@ -57,5 +69,5 @@ public abstract class ModelMapper {
     protected String mapTechnologyToString(Technology technology) {
         return technology.getName();
     }
-
+    public abstract Genre toEntity(Long id);
 }

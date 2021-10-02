@@ -1,8 +1,7 @@
 package com.it.cinemabackend.services;
 
-import com.it.cinemabackend.model.movie.Technology;
+import com.it.cinemabackend.model.domain.Technology;
 import com.it.cinemabackend.repository.TechnologyRepository;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +19,7 @@ public class TechnologyService {
     }
 
     public List<Technology> findAll() {
-        List<Technology> technologies = new ArrayList<>();
-        technologyRepository.findAll().forEach(technologies::add);
-        return technologies;
+        return technologyRepository.findAll();
     }
 
     public Technology save(Technology technology) {

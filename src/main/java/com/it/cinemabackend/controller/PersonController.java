@@ -1,7 +1,9 @@
-package com.it.cinemabackend.controllers;
+package com.it.cinemabackend.controller;
 
 import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.model.domain.Person;
 import com.it.cinemabackend.model.dto.PersonDTO;
+import com.it.cinemabackend.model.dto.PersonNewDTO;
 import com.it.cinemabackend.services.PersonService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -9,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -37,5 +41,11 @@ public class PersonController {
         PersonDTO personDTO = modelMapper
             .personToPersonDTO(personService.findById(id));
         return new ResponseEntity<>(personDTO, HttpStatus.OK);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<Long> addPerson(@RequestBody PersonNewDTO personNewDTO) {
+        Person person = personService.save(modelMapper.personNewDTOTOPerson(personNewDTO));
+        return new ResponseEntity<>(person.getId(), HttpStatus.OK);
     }
 }

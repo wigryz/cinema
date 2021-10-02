@@ -1,4 +1,4 @@
-package com.it.cinemabackend.controllers;
+package com.it.cinemabackend.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
@@ -14,11 +14,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.model.domain.Language;
+import com.it.cinemabackend.model.domain.Showtime;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
-import com.it.cinemabackend.model.movie.Language;
-import com.it.cinemabackend.model.movie.Showtime;
 import com.it.cinemabackend.services.ShowtimeService;
+import com.it.cinemabackend.services.TechnologyService;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,6 +37,8 @@ class ShowtimeControllerTest {
     @Mock
     ShowtimeService showtimeService;
     @Mock
+    TechnologyService technologyService;
+    @Mock
     ModelMapper modelMapper;
 
     MockMvc mockMvc;
@@ -45,7 +48,7 @@ class ShowtimeControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        showtimeController = new ShowtimeController(showtimeService, modelMapper);
+        showtimeController = new ShowtimeController(showtimeService, technologyService, modelMapper);
         mockMvc = MockMvcBuilders.standaloneSetup(showtimeController).build();
     }
 

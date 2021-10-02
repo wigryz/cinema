@@ -1,4 +1,4 @@
-package com.it.cinemabackend.model.movie;
+package com.it.cinemabackend.model.domain;
 
 import lombok.Generated;
 
