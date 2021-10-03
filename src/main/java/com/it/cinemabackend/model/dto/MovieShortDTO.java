@@ -14,7 +14,7 @@ public class MovieShortDTO {
 
     private Integer id;
     private String title;
-    private List<String> genres;
+    private List<GenreDTO> genres;
     private String ageRestriction;
     private String duration;
 }
