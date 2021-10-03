@@ -14,6 +14,8 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
+    public Genre findById(Long id) { return genreRepository.findById(id).orElseThrow(); }
+
     public List<Genre> findAll() {
         return genreRepository.findAll();
     }

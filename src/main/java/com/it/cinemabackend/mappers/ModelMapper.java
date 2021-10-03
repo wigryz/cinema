@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 
 @Component // just to get rid of "no bean of type ... warning"
 @Mapper(componentModel = "spring",
-    uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class, MovieMapper.class})
+    uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class})
 public abstract class ModelMapper {
 
     @Mapping(source = "movie.id", target = "movieId")
@@ -36,16 +36,10 @@ public abstract class ModelMapper {
     @Mapping(source = "technology.name", target = "technology")
     public abstract ShowtimeDTO showtimeToShowtimeDTO(Showtime showtime);
 
-    @Mapping(source = "id", target = "showtimeId")
-    @Mapping(source = "dateTime", target = "dateTime")
-    @Mapping(source = "technology", target = "technology")
-    @Mapping(source = "language", target = "language")
     public abstract ShowtimeGroupedDTO showtimeToShowtimeGroupedDTO(Showtime showtime);
 
     @Mapping(source = "movieId", target = "movie")
-    @Mapping(source = "dateTime", target = "dateTime")
     @Mapping(source = "technologyId", target = "technology")
-    @Mapping(source = "language", target = "language")
     public abstract Showtime showtimeNewDTOToShowtime(ShowtimeNewDTO showtimeNewDTO);
 
     public abstract MovieShortDTO movieToMovieShortDTO(Movie movie);
@@ -63,11 +57,10 @@ public abstract class ModelMapper {
     public abstract Technology technologyNewDTOToTechnology(TechnologyNewDTO technologyNewDTO);
     public abstract TechnologyDTO technologyToTechnologyDTO(Technology technology);
 
-    protected String mapGenreToString(Genre genre) {
-        return genre.getName();
-    }
     protected String mapTechnologyToString(Technology technology) {
         return technology.getName();
     }
-    public abstract Genre toEntity(Long id);
+
+    public abstract Genre idToGenre(Long id);
+    public abstract Person idToPerson(Long id);
 }

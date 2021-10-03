@@ -16,8 +16,8 @@ public class ShowtimeDTO {
     private Long id;
     private Long movieId;
     private String title;
-    private List<String> genres;
-    private String ageRestriction;
+    private List<GenreDTO> genres;
+    private Integer ageRestriction;
     private String duration;
     private LocalDateTime dateTime;
     private String technology;
