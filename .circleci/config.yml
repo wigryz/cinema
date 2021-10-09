@@ -9,7 +9,8 @@ jobs:
       - run: 
           name: Printing some paths
           command: pwd \
-           ls -a
+           ls -a \
+           echo ${CIRCLE_WORKING_DIRECTORY}
 
       - run:
           name: Clearing project directory
