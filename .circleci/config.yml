@@ -13,9 +13,7 @@ jobs:
       - run:
           name: Clearing project directory
           command: rm -rf /home/circleci/project
-
-      - checkout
-
+          
       - restore_cache:
           key: cinema-backend-{{ checksum "backend/pom.xml" }}
 
