@@ -5,10 +5,6 @@ jobs:
     docker:
       - image: cimg/openjdk:16.0
     steps:
-      - run: 
-          name: Printing some paths
-          command: pwd && ls -a && echo ${CIRCLE_WORKING_DIRECTORY}
-
       - run:
           name: Clearing project directory
           command: rm -rf /home/circleci/project
@@ -16,13 +12,8 @@ jobs:
       - checkout:
           path: ~/project
 
-      - run: 
-          name: Printing some paths
-          command: pwd && ls -a && echo ${CIRCLE_WORKING_DIRECTORY}
-
-
       - restore_cache:
-          key: cinema-backend-{{ checksum "backend/pom.xml" }}
+          key: cinema-backend-{{ checksum "pom.xml" }}
 
       - run:
           name: Downloading dependencies
