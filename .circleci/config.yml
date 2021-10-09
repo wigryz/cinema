@@ -3,16 +3,14 @@ jobs:
   backend-build:
     docker:
       - image: cimg/openjdk:16.0
+    environment:
+      CIRCLE_WORKING_DIRECTORY: backend
     steps:
       - run:
           name: Clearing project directory
           command: rm -rf /home/circleci/project
 
       - checkout
-
-      - run:
-          name: Moving to backend root directory
-          command: cd backend
 
       - restore_cache:
           key: cinema-backend-{{ checksum "pom.xml" }}
