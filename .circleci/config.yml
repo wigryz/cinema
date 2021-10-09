@@ -13,7 +13,14 @@ jobs:
       - run:
           name: Clearing project directory
           command: rm -rf /home/circleci/project
-          
+
+      - checkout
+
+      - run: 
+          name: Printing some paths
+          command: pwd && ls -a && echo ${CIRCLE_WORKING_DIRECTORY}
+
+
       - restore_cache:
           key: cinema-backend-{{ checksum "backend/pom.xml" }}
 
