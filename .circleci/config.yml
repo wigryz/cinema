@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: Moving to backend root directory
-          command: ls -a
+          command: cd backend
 
       - restore_cache:
           key: cinema-backend-{{ checksum "pom.xml" }}
