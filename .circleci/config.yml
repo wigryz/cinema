@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  backend-build:
     docker:
       - image: cimg/openjdk:16.0
     steps:
@@ -9,6 +9,10 @@ jobs:
           command: rm -rf /home/circleci/project
 
       - checkout
+
+      - run:
+          name: Moving to backend root directory
+          command: cd cinema-backend
 
       - restore_cache:
           key: cinema-backend-{{ checksum "pom.xml" }}
@@ -64,3 +68,9 @@ jobs:
       - store_artifacts:
           name: Uploading coverage reports to artifacts
           path: target/coverage_reports
+
+
+workflows:
+  backend_and_frontend:
+    jobs:
+      - backend-build
