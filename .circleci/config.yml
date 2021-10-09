@@ -6,6 +6,11 @@ jobs:
     environment:
       CIRCLE_WORKING_DIRECTORY: backend
     steps:
+      - run: 
+          name: Printing some paths
+          command: pwd \
+           ls -a
+
       - run:
           name: Clearing project directory
           command: rm -rf /home/circleci/project
@@ -69,6 +74,6 @@ jobs:
 
 
 workflows:
-  backend_and_frontend:
+  backend-and-frontend:
     jobs:
       - backend-build
