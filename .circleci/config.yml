@@ -13,7 +13,7 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: cinema-backend-{{ checksum "pom.xml" }}
+          key: cinema-backend-{{ checksum "backend/pom.xml" }}
 
       - run:
           name: Downloading dependencies
