@@ -1,11 +1,5 @@
-# CINEMA-BACKEND
-## _Best backend for your cinema web application._
+# CINEMA
 [![CircleCI](https://circleci.com/gh/wigryz/cinema-backend/tree/master.svg?style=svg&circle-token=cf5afc5c5e4df2f08e50376029196dd32e58e87a)](https://circleci.com/gh/wigryz/cinema-backend/tree/master)
-
-### What is cinema-backend?
-
-cinema-backend is a backend application written fully in java.
-Link for [github repository][repo].
 
 This project is developed by [jlitewka99][jlitewka99] and [wigryz][wigryz].
 
@@ -17,11 +11,13 @@ TODO
 TODO
 ## Try out our application!
 
-To start using cinema-backend you need to have java 16 installed.  
+To start using cinema-backend you need to have java 16 and npm installed.  
 After that all you have to do is to clone our repo and run following commands:
 ```sh
-cd cinema-backend
+cd cinema/backend
 ./mvnw spring-boot:run
+cd cinema/frontend
+npm start
 ```
 
 ## Docker
