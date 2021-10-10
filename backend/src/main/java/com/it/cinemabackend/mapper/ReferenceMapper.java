@@ -1,4 +1,4 @@
-package com.it.cinemabackend.mappers;
+package com.it.cinemabackend.mapper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

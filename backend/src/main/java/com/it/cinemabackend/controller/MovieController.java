@@ -1,14 +1,14 @@
 package com.it.cinemabackend.controller;
 
-import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.mapper.ModelMapper;
 import com.it.cinemabackend.model.domain.Genre;
 import com.it.cinemabackend.model.domain.Movie;
 import com.it.cinemabackend.model.dto.GenreDTO;
 import com.it.cinemabackend.model.dto.GenreNewDTO;
 import com.it.cinemabackend.model.dto.MovieDTO;
 import com.it.cinemabackend.model.dto.MovieNewDTO;
-import com.it.cinemabackend.services.GenreService;
-import com.it.cinemabackend.services.MovieService;
+import com.it.cinemabackend.service.GenreService;
+import com.it.cinemabackend.service.MovieService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

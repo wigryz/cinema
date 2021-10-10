@@ -1,4 +1,4 @@
-package com.it.cinemabackend.mappers;
+package com.it.cinemabackend.mapper;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -14,8 +14,8 @@ import com.it.cinemabackend.model.dto.MovieNewDTO;
 import com.it.cinemabackend.model.dto.ShowtimeDTO;
 import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
-import com.it.cinemabackend.services.MovieService;
-import com.it.cinemabackend.services.TechnologyService;
+import com.it.cinemabackend.service.MovieService;
+import com.it.cinemabackend.service.TechnologyService;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

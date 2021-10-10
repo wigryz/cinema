@@ -1,4 +1,4 @@
-package com.it.cinemabackend.mappers;
+package com.it.cinemabackend.mapper;
 
 import com.it.cinemabackend.model.domain.Genre;
 import com.it.cinemabackend.model.domain.Movie;
@@ -17,8 +17,8 @@ import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
 import com.it.cinemabackend.model.dto.TechnologyDTO;
 import com.it.cinemabackend.model.dto.TechnologyNewDTO;
-import com.it.cinemabackend.services.MovieService;
-import com.it.cinemabackend.services.TechnologyService;
+import com.it.cinemabackend.service.MovieService;
+import com.it.cinemabackend.service.TechnologyService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;

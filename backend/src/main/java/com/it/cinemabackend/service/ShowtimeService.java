@@ -1,4 +1,4 @@
-package com.it.cinemabackend.services;
+package com.it.cinemabackend.service;
 
 import com.it.cinemabackend.model.domain.Showtime;
 import com.it.cinemabackend.repository.ShowtimeRepository;
