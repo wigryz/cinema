@@ -1,6 +1,6 @@
 package com.it.cinemabackend.controller;
 
-import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.mapper.ModelMapper;
 import com.it.cinemabackend.model.domain.Movie;
 import com.it.cinemabackend.model.domain.Showtime;
 import com.it.cinemabackend.model.domain.Technology;
@@ -10,8 +10,8 @@ import com.it.cinemabackend.model.dto.ShowtimeGroupedDTO;
 import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
 import com.it.cinemabackend.model.dto.TechnologyDTO;
 import com.it.cinemabackend.model.dto.TechnologyNewDTO;
-import com.it.cinemabackend.services.ShowtimeService;
-import com.it.cinemabackend.services.TechnologyService;
+import com.it.cinemabackend.service.ShowtimeService;
+import com.it.cinemabackend.service.TechnologyService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

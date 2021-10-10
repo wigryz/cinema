@@ -1,10 +1,10 @@
 package com.it.cinemabackend.controller;
 
-import com.it.cinemabackend.mappers.ModelMapper;
+import com.it.cinemabackend.mapper.ModelMapper;
 import com.it.cinemabackend.model.domain.Person;
 import com.it.cinemabackend.model.dto.PersonDTO;
 import com.it.cinemabackend.model.dto.PersonNewDTO;
-import com.it.cinemabackend.services.PersonService;
+import com.it.cinemabackend.service.PersonService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

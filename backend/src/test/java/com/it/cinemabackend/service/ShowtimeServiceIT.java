@@ -1,4 +1,4 @@
-package com.it.cinemabackend.services;
+package com.it.cinemabackend.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 

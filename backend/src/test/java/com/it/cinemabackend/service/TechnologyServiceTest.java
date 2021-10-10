@@ -1,4 +1,4 @@
-package com.it.cinemabackend.services;
+package com.it.cinemabackend.service;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
