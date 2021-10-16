@@ -1,5 +1,6 @@
 package com.it.cinemabackend.auth.config;
 
+import com.it.cinemabackend.auth.domain.model.Role;
 import com.it.cinemabackend.auth.filter.JwtFilter;
 import com.it.cinemabackend.auth.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -55,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // public endpoints
             .antMatchers(HttpMethod.GET, "/api/**").permitAll()
             // private endpoints
+            .antMatchers(HttpMethod.POST, "/api/**").hasRole(Role.ADMIN)
             .anyRequest().authenticated();
 
         // Add JWT token filter
