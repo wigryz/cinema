@@ -13,11 +13,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.it.cinemabackend.mapper.ModelMapper;
-import com.it.cinemabackend.model.domain.Language;
-import com.it.cinemabackend.model.domain.Showtime;
-import com.it.cinemabackend.model.dto.ShowtimeDTO;
-import com.it.cinemabackend.model.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.mapper.ModelMapper;
+import com.it.cinemabackend.domain.model.Language;
+import com.it.cinemabackend.domain.model.Showtime;
 import com.it.cinemabackend.service.ShowtimeService;
 import com.it.cinemabackend.service.TechnologyService;
 import java.nio.charset.StandardCharsets;
@@ -62,7 +62,7 @@ class ShowtimeControllerTest {
         when(showtimeService.findCurrent()).thenReturn(List.of(showtime));
         when(modelMapper.showtimeToShowtimeDTO(any(Showtime.class))).thenReturn(showtimeDTO);
 
-        mockMvc.perform(get("/showtimes/current"))
+        mockMvc.perform(get("/api/showtime/current"))
             .andExpect(status().isOk())
             .andExpect(content().json("[{'dateTime':[2000,4,27,12,0]}]"));
 
@@ -79,7 +79,7 @@ class ShowtimeControllerTest {
         when(showtimeService.findByDate(dateTime.toLocalDate())).thenReturn(List.of(showtime));
         when(modelMapper.showtimeToShowtimeDTO(any(Showtime.class))).thenReturn(showtimeDTO);
 
-        mockMvc.perform(get(String.format("/showtimes/of-date/%s",
+        mockMvc.perform(get(String.format("/api/showtime/of-date/%s",
                 dateTime.toLocalDate().format(DateTimeFormatter.ISO_DATE))))
             .andExpect(status().isOk())
             .andExpect(content().json("[{'dateTime':[2000,4,27,12,0]}]"));
@@ -99,7 +99,7 @@ class ShowtimeControllerTest {
         when(modelMapper.showtimeNewDTOToShowtime(any(ShowtimeNewDTO.class)))
             .thenReturn(showtime);
 
-        mockMvc.perform(post("/showtimes/new")
+        mockMvc.perform(post("/api/showtime")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(convertObjectToJsonBytes(showtimeNewDTO)))
             .andDo(print())

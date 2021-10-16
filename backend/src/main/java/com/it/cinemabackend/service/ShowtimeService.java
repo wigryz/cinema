@@ -1,6 +1,6 @@
 package com.it.cinemabackend.service;
 
-import com.it.cinemabackend.model.domain.Showtime;
+import com.it.cinemabackend.domain.model.Showtime;
 import com.it.cinemabackend.repository.ShowtimeRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
