@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.it.cinemabackend.model.domain.Technology;
+import com.it.cinemabackend.domain.model.Technology;
 import com.it.cinemabackend.repository.TechnologyRepository;
 import java.util.Collections;
 import java.util.List;

@@ -2,9 +2,9 @@ package com.it.cinemabackend.service;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.it.cinemabackend.model.domain.Movie;
-import com.it.cinemabackend.model.domain.Showtime;
-import com.it.cinemabackend.model.domain.Technology;
+import com.it.cinemabackend.domain.model.Movie;
+import com.it.cinemabackend.domain.model.Showtime;
+import com.it.cinemabackend.domain.model.Technology;
 import com.it.cinemabackend.repository.ShowtimeRepository;
 import java.time.LocalDateTime;
 import java.util.List;

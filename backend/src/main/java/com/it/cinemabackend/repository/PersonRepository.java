@@ -1,6 +1,6 @@
 package com.it.cinemabackend.repository;
 
-import com.it.cinemabackend.model.domain.Person;
+import com.it.cinemabackend.domain.model.Person;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 

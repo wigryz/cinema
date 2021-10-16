@@ -1,6 +1,6 @@
 package com.it.cinemabackend.service;
 
-import com.it.cinemabackend.model.domain.Movie;
+import com.it.cinemabackend.domain.model.Movie;
 import com.it.cinemabackend.repository.MovieRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;

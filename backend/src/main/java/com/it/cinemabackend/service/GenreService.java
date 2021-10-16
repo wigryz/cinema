@@ -1,6 +1,6 @@
 package com.it.cinemabackend.service;
 
-import com.it.cinemabackend.model.domain.Genre;
+import com.it.cinemabackend.domain.model.Genre;
 import com.it.cinemabackend.repository.GenreRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,9 @@ public class GenreService {
         this.genreRepository = genreRepository;
     }
 
-    public Genre findById(Long id) { return genreRepository.findById(id).orElseThrow(); }
+    public Genre findById(Long id) {
+        return genreRepository.findById(id).orElseThrow();
+    }
 
     public List<Genre> findAll() {
         return genreRepository.findAll();

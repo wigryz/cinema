@@ -1,9 +1,9 @@
 package com.it.cinemabackend.auth.config;
 
 import com.it.cinemabackend.auth.filter.JwtFilter;
-import com.it.cinemabackend.auth.repo.UserRepository;
-import javax.servlet.http.HttpServletResponse;
+import com.it.cinemabackend.auth.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -48,24 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and();
 
-        // Set unauthorized requests exception handler
-        http = http
-            .exceptionHandling()
-            .authenticationEntryPoint(
-                (request, response, ex) -> {
-                    response.sendError(
-                        HttpServletResponse.SC_UNAUTHORIZED,
-                        ex.getMessage()
-                    );
-                }
-            )
-            .and();
-
         http.authorizeRequests()
-            // Our public endpoints
+            // auth endpoints
+            .antMatchers("/register").permitAll()
             .antMatchers("/login").permitAll()
-            .antMatchers("/for-all").permitAll()
-            // Our private endpoints
+            // public endpoints
+            .antMatchers(HttpMethod.GET, "/api/**").permitAll()
+            // private endpoints
             .anyRequest().authenticated();
 
         // Add JWT token filter
@@ -75,10 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
-    //TODO HAVE TO BE CHANGED TO BCRYPT
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.it.cinemabackend.auth.filter;
 
-import com.it.cinemabackend.auth.repo.UserRepository;
+import com.it.cinemabackend.auth.repository.UserRepository;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.FilterChain;
@@ -18,11 +18,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
-    private final JwtUtil jwtUtil;
     private final UserRepository userRepo;
 
-    public JwtFilter(JwtUtil jwtUtil, UserRepository userRepo) {
-        this.jwtUtil = jwtUtil;
+    public JwtFilter(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -40,14 +38,14 @@ public class JwtFilter extends OncePerRequestFilter {
 
         // Get jwt token and validate
         final String token = header.split(" ")[1].trim();
-        if (!jwtUtil.validate(token)) {
+        if (!JwtUtils.validate(token)) {
             chain.doFilter(request, response);
             return;
         }
 
         // Get user identity and set it on the spring security context
         UserDetails userDetails = userRepo
-            .findByUsername(jwtUtil.getUsername(token))
+            .findByUsername(JwtUtils.getUsername(token))
             .orElse(null);
 
         UsernamePasswordAuthenticationToken
