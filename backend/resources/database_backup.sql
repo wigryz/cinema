@@ -62,6 +62,10 @@ CREATE TABLE cinemadb.user_role (
 	CONSTRAINT fk_user_role_role FOREIGN KEY ( role_id ) REFERENCES cinemadb.role( id ) ON DELETE NO ACTION ON UPDATE NO ACTION
  ) engine=InnoDB;
 
+CREATE INDEX fk_user_role_cinema_user ON cinemadb.user_role ( user_id );
+
+CREATE INDEX fk_user_role_role ON cinemadb.user_role ( role_id );
+
 CREATE TABLE cinemadb.movie_actor ( 
 	movie_id             int  NOT NULL    ,
 	person_id            int  NOT NULL    ,
@@ -96,6 +100,8 @@ CREATE INDEX fk_showtime_movie ON cinemadb.showtime ( movie_id );
 
 CREATE INDEX fk_showtime_technology ON cinemadb.showtime ( technology_id );
 
+INSERT INTO cinemadb.cinema_user( id, username, password, email, created_at ) VALUES ( 1, 'user', 'user', 'user@gmail.com', '2021-10-16 05.41.57 PM');
+INSERT INTO cinemadb.cinema_user( id, username, password, email, created_at ) VALUES ( 2, 'admin', 'admin', 'admin@gmail.com', '2021-10-16 05.41.57 PM');
 INSERT INTO cinemadb.genre( id, name ) VALUES ( 6, 'Animation');
 INSERT INTO cinemadb.genre( id, name ) VALUES ( 4, 'Comedy');
 INSERT INTO cinemadb.genre( id, name ) VALUES ( 3, 'Documentary');
@@ -174,8 +180,12 @@ INSERT INTO cinemadb.person( id, first_name, second_name, last_name, portrait_pa
 INSERT INTO cinemadb.person( id, first_name, second_name, last_name, portrait_path ) VALUES ( 18, 'Emhupackor', 'Cipquestupazz', 'Hapquestupicator', 'resources/portraits/cqtw.php');
 INSERT INTO cinemadb.person( id, first_name, second_name, last_name, portrait_path ) VALUES ( 19, 'Gromunplor', 'Emsipax', 'Monvenamin', null);
 INSERT INTO cinemadb.person( id, first_name, second_name, last_name, portrait_path ) VALUES ( 20, 'Tipfropanover', 'Barmunor', 'Trukilepan', null);
+INSERT INTO cinemadb.role( id, name ) VALUES ( 1, 'ROLE_USER');
+INSERT INTO cinemadb.role( id, name ) VALUES ( 2, 'ROLE_ADMIN');
 INSERT INTO cinemadb.technology( id, name ) VALUES ( 1, '2D');
 INSERT INTO cinemadb.technology( id, name ) VALUES ( 2, '3D');
+INSERT INTO cinemadb.user_role( user_id, role_id ) VALUES ( 1, 1);
+INSERT INTO cinemadb.user_role( user_id, role_id ) VALUES ( 2, 2);
 INSERT INTO cinemadb.movie_actor( movie_id, person_id ) VALUES ( 6, 1);
 INSERT INTO cinemadb.movie_actor( movie_id, person_id ) VALUES ( 7, 1);
 INSERT INTO cinemadb.movie_actor( movie_id, person_id ) VALUES ( 11, 3);

@@ -1,7 +1,7 @@
 package com.it.cinemabackend.auth.config;
 
 import com.it.cinemabackend.auth.filter.JwtFilter;
-import com.it.cinemabackend.auth.repo.UserRepositoryMock;
+import com.it.cinemabackend.auth.repo.UserRepository;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,11 +21,11 @@ import org.springframework.web.filter.CorsFilter;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final UserRepositoryMock userRepo;
+    private final UserRepository userRepo;
     private final JwtFilter jwtFilter;
 
-    public SecurityConfig(JwtFilter jwtFilter) {
-        userRepo = new UserRepositoryMock();
+    public SecurityConfig(UserRepository userRepo, JwtFilter jwtFilter) {
+        this.userRepo = userRepo;
         this.jwtFilter = jwtFilter;
     }
 
@@ -75,6 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
+    //TODO HAVE TO BE CHANGED TO BCRYPT
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
