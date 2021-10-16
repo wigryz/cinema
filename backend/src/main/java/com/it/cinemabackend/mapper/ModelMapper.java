@@ -19,13 +19,15 @@ import com.it.cinemabackend.model.dto.TechnologyDTO;
 import com.it.cinemabackend.model.dto.TechnologyNewDTO;
 import com.it.cinemabackend.service.MovieService;
 import com.it.cinemabackend.service.TechnologyService;
+import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
 
 @Component // just to get rid of "no bean of type ... warning"
 @Mapper(componentModel = "spring",
-    uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class})
+    uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class},
+    builder = @Builder(disableBuilder = true))
 public abstract class ModelMapper {
 
     @Mapping(source = "movie.id", target = "movieId")

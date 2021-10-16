@@ -2,7 +2,6 @@ package com.it.cinemabackend.auth.repo;
 
 import com.it.cinemabackend.auth.domain.Role;
 import com.it.cinemabackend.auth.domain.User;
-
 import java.util.Optional;
 import java.util.Set;
 
