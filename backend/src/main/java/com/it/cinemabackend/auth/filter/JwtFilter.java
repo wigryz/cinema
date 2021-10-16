@@ -1,6 +1,6 @@
 package com.it.cinemabackend.auth.filter;
 
-import com.it.cinemabackend.auth.repo.UserRepositoryMock;
+import com.it.cinemabackend.auth.repo.UserRepository;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.FilterChain;
@@ -19,10 +19,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
-    private final UserRepositoryMock userRepo = new UserRepositoryMock();
+    private final UserRepository userRepo;
 
-    public JwtFilter(JwtUtil jwtUtil) {
+    public JwtFilter(JwtUtil jwtUtil, UserRepository userRepo) {
         this.jwtUtil = jwtUtil;
+        this.userRepo = userRepo;
     }
 
     @Override
