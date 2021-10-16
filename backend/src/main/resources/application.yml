@@ -8,15 +8,13 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: 'jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false'
-    username: 'user'
-    password: ''
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cinemadb
+    username: 'cinema'
+    password: 'cinema'
   jpa:
-    database-platform: 'org.hibernate.dialect.H2Dialect'
+    database-platform: 'org.hibernate.dialect.MySQLDialect'
     defer-datasource-initialization: true
-  h2:
-    console:
-      enabled: true
   sql:
     init:
       mode: always

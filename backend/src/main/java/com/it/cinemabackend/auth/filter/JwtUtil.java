@@ -1,5 +1,7 @@
 package com.it.cinemabackend.auth.filter;
 
+import static java.lang.String.format;
+
 import com.it.cinemabackend.auth.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -8,13 +10,10 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import java.util.Date;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
-
-import static java.lang.String.format;
 
 @Component
 @RequiredArgsConstructor
