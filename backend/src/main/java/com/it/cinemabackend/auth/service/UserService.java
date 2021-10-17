@@ -23,6 +23,12 @@ public class UserService implements UserDetailsService {
             .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
 
+    public void activateAccount(String username) {
+        User user = userRepo.findByUsername(username).orElseThrow();
+        user.setEnabled(true);
+        userRepo.save(user);
+    }
+
     public User save(User user) {
         return userRepo.save(user);
     }

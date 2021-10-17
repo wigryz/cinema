@@ -41,6 +41,8 @@ public class User extends BaseEntity implements UserDetails {
 
     private LocalDateTime createdAt;
 
+    private boolean enabled;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -64,6 +66,6 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

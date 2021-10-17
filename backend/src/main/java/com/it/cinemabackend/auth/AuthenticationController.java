@@ -16,20 +16,22 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @Slf4j
+@RestController
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final RoleService roleService;
-
 
     public AuthenticationController(AuthenticationManager authenticationManager,
                                     PasswordEncoder passwordEncoder,
@@ -61,17 +63,49 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Long> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+
+        String token = JwtUtils.generateActivationToken(request.getUsername());
+
         User user = User.builder()
             .username(request.getUsername())
             .password(passwordEncoder.encode(request.getPassword()))
             .firstName(request.getFirstName())
             .lastName(request.getLastName())
             .email(request.getEmail())
+            .enabled(false)
             .createdAt(LocalDateTime.now())
             .roles(Set.of(roleService.findByName("ROLE_USER")))
             .build();
         userService.save(user);
-        return ResponseEntity.ok(user.getId());
+
+        return ResponseEntity.ok(token);
+    }
+
+    @GetMapping("/generate-token")
+    public ResponseEntity<String> generateToken(@RequestBody RegisterRequest request) {
+        UserDetails user = userService.loadUserByUsername(request.getUsername());
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } else {
+            if (user.isEnabled())
+                return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build();
+            else {
+                String token = JwtUtils.generateActivationToken(request.getUsername());
+                return ResponseEntity.ok(token);
+            }
+        }
+
+    }
+
+    @PostMapping("/activate/{token}")
+    public ResponseEntity<String> activate(@PathVariable String token) {
+
+        if (JwtUtils.validateActivationToken(token)) {
+            String username = JwtUtils.getUsername(token);
+            userService.activateAccount(username);
+            return ResponseEntity.ok("Account activated.");
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token.");
     }
 }
