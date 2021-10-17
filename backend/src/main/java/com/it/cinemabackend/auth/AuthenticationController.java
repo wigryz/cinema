@@ -83,7 +83,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/generate-token")
-    public ResponseEntity<String> generateToken(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> generateToken(@RequestBody AuthRequest request) {
         UserDetails user = userService.loadUserByUsername(request.getUsername());
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
