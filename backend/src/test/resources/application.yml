@@ -10,6 +10,16 @@ spring:
   sql:
     init:
       mode: always
+  mail:
+    host: smtp.gmail.com
+    username: username@mail.com
+    password: something
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
 logging:
   level:
     root: info

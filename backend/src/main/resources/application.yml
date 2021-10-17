@@ -18,6 +18,16 @@ spring:
   sql:
     init:
       mode: always
+  mail:
+    host: smtp.gmail.com
+    username: cinema.backend.auto@gmail.com
+    password: ugnlshvskbvzuowr
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
 logging:
   level:
     root: info

@@ -6,6 +6,7 @@ import com.it.cinemabackend.auth.domain.model.User;
 import com.it.cinemabackend.auth.filter.JwtUtils;
 import com.it.cinemabackend.auth.service.RoleService;
 import com.it.cinemabackend.auth.service.UserService;
+import com.it.cinemabackend.notification.NotificationService;
 import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
@@ -32,14 +33,17 @@ public class AuthenticationController {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final RoleService roleService;
+    private final NotificationService notificationService;
 
     public AuthenticationController(AuthenticationManager authenticationManager,
-                                    PasswordEncoder passwordEncoder,
-                                    UserService userService, RoleService roleService) {
+                                    PasswordEncoder passwordEncoder, UserService userService,
+                                    RoleService roleService,
+                                    NotificationService notificationService) {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.roleService = roleService;
+        this.notificationService = notificationService;
     }
 
     @PostMapping("/login")
@@ -75,10 +79,11 @@ public class AuthenticationController {
             .email(request.getEmail())
             .enabled(false)
             .createdAt(LocalDateTime.now())
-            .roles(Set.of(roleService.findByName("ROLE_USER")))
+            .roles(Set.of(roleService.findByName("ROLE_USER"))) //TODO SHOULD BE REFACTORED SOMEHOW
             .build();
         userService.save(user);
 
+        notificationService.sendActivationToken(user, token);
         return ResponseEntity.ok(token);
     }
 
@@ -98,7 +103,7 @@ public class AuthenticationController {
 
     }
 
-    @PostMapping("/activate/{token}")
+    @GetMapping("/activate/{token}")
     public ResponseEntity<String> activate(@PathVariable String token) {
 
         if (JwtUtils.validateActivationToken(token)) {
