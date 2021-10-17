@@ -53,6 +53,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // auth endpoints
             .antMatchers("/register").permitAll()
             .antMatchers("/login").permitAll()
+            .antMatchers("/generate-token").permitAll()
+            .antMatchers("/activate/**").permitAll()
             // public endpoints
             .antMatchers(HttpMethod.GET, "/api/**").permitAll()
             // private endpoints
