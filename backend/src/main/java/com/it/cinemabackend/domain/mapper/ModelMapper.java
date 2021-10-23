@@ -2,6 +2,7 @@ package com.it.cinemabackend.domain.mapper;
 
 import com.it.cinemabackend.domain.dto.GenreDTO;
 import com.it.cinemabackend.domain.dto.GenreNewDTO;
+import com.it.cinemabackend.domain.dto.ImageNoId;
 import com.it.cinemabackend.domain.dto.MovieDTO;
 import com.it.cinemabackend.domain.dto.MovieNewDTO;
 import com.it.cinemabackend.domain.dto.MovieShortDTO;
@@ -13,6 +14,7 @@ import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
 import com.it.cinemabackend.domain.dto.TechnologyDTO;
 import com.it.cinemabackend.domain.dto.TechnologyNewDTO;
 import com.it.cinemabackend.domain.model.Genre;
+import com.it.cinemabackend.domain.model.Image;
 import com.it.cinemabackend.domain.model.Movie;
 import com.it.cinemabackend.domain.model.Person;
 import com.it.cinemabackend.domain.model.Showtime;
@@ -54,6 +56,7 @@ public abstract class ModelMapper {
 
     public abstract Person personNewDTOTOPerson(PersonNewDTO personNewDTO);
 
+    public abstract ImageNoId imageToImageNoId(Image image);
 
     public abstract GenreDTO genreToGenreDTO(Genre genre);
 
