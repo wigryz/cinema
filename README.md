@@ -1,5 +1,5 @@
 # CINEMA
-[![CircleCI](https://circleci.com/gh/wigryz/cinema-backend/tree/master.svg?style=svg&circle-token=cf5afc5c5e4df2f08e50376029196dd32e58e87a)](https://circleci.com/gh/wigryz/cinema-backend/tree/master)
+[![CircleCI](https://circleci.com/gh/wigryz/cinema/tree/master.svg?style=svg)](https://circleci.com/gh/wigryz/cinema/tree/master)
 
 This project is developed by [jlitewka99][jlitewka99] and [wigryz][wigryz].
 
