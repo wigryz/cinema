@@ -9,6 +9,7 @@ import com.it.cinemabackend.auth.service.UserService;
 import com.it.cinemabackend.notification.NotificationService;
 import java.time.LocalDateTime;
 import java.util.Set;
+import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -67,7 +68,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody @Valid RegisterRequest request) {
 
         String token = JwtUtils.generateActivationToken(request.getUsername());
 
