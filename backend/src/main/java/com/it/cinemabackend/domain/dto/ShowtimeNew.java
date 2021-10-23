@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ShowtimeNewDTO {
+public class ShowtimeNew {
 
     private Long movieId;
     private LocalDateTime dateTime;

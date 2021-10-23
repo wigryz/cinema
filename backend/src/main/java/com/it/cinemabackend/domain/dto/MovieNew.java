@@ -12,7 +12,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class MovieNewDTO {
+public class MovieNew {
 
     private String title;
     private String shortDescription;

@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import com.it.cinemabackend.domain.dto.GenreDTO;
-import com.it.cinemabackend.domain.dto.MovieNewDTO;
+import com.it.cinemabackend.domain.dto.MovieNew;
 import com.it.cinemabackend.domain.dto.ShowtimeDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeGroupedDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeGrouped;
+import com.it.cinemabackend.domain.dto.ShowtimeNew;
 import com.it.cinemabackend.domain.model.Genre;
 import com.it.cinemabackend.domain.model.Language;
 import com.it.cinemabackend.domain.model.Movie;
@@ -75,11 +75,11 @@ class ModelMapperTest {
 
     @Test
     void showtimeToShowtimeGroupedDTO() {
-        ShowtimeGroupedDTO showtimeGroupedDTO = modelMapper.showtimeToShowtimeGroupedDTO(showtime);
-        assertEquals(showtime.getId(), showtimeGroupedDTO.getShowtimeId());
-        assertEquals(showtime.getDateTime(), showtimeGroupedDTO.getDateTime());
-        assertEquals(showtime.getTechnology().getName(), showtimeGroupedDTO.getTechnology());
-        assertEquals(showtime.getLanguage().name(), showtimeGroupedDTO.getLanguage());
+        ShowtimeGrouped showtimeGrouped = modelMapper.showtimeToShowtimeGroupedDTO(showtime);
+        assertEquals(showtime.getId(), showtimeGrouped.getShowtimeId());
+        assertEquals(showtime.getDateTime(), showtimeGrouped.getDateTime());
+        assertEquals(showtime.getTechnology().getName(), showtimeGrouped.getTechnology());
+        assertEquals(showtime.getLanguage().name(), showtimeGrouped.getLanguage());
     }
 
     @Test
@@ -88,43 +88,43 @@ class ModelMapperTest {
         technology.setId(1L);
         when(movieService.findById(1L)).thenReturn(movie);
         when(technologyService.findById(1L)).thenReturn(technology);
-        ShowtimeNewDTO showtimeNewDTO = new ShowtimeNewDTO();
-        showtimeNewDTO.setMovieId(1L);
-        showtimeNewDTO.setDateTime(LocalDateTime.now());
-        showtimeNewDTO.setLanguage("DUBBING");
-        showtimeNewDTO.setTechnologyId(1L);
-        Showtime newShowtime = modelMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
+        ShowtimeNew showtimeNew = new ShowtimeNew();
+        showtimeNew.setMovieId(1L);
+        showtimeNew.setDateTime(LocalDateTime.now());
+        showtimeNew.setLanguage("DUBBING");
+        showtimeNew.setTechnologyId(1L);
+        Showtime newShowtime = modelMapper.showtimeNewToShowtime(showtimeNew);
 
-        assertEquals(showtimeNewDTO.getMovieId(), newShowtime.getMovie().getId());
-        assertEquals(showtimeNewDTO.getDateTime(), newShowtime.getDateTime());
-        assertEquals(showtimeNewDTO.getLanguage(), newShowtime.getLanguage().name());
-        assertEquals(showtimeNewDTO.getTechnologyId(), newShowtime.getTechnology().getId());
+        assertEquals(showtimeNew.getMovieId(), newShowtime.getMovie().getId());
+        assertEquals(showtimeNew.getDateTime(), newShowtime.getDateTime());
+        assertEquals(showtimeNew.getLanguage(), newShowtime.getLanguage().name());
+        assertEquals(showtimeNew.getTechnologyId(), newShowtime.getTechnology().getId());
     }
 
     @Test
     void movieNewDTOToMovie() {
         person.setId(1L);
         genre.setId(1L);
-        MovieNewDTO movieNewDTO = new MovieNewDTO();
-        movieNewDTO.setTitle("title");
-        movieNewDTO.setShortDescription("shortDesc");
-        movieNewDTO.setDescription("desc");
-        movieNewDTO.setYearOfProduction(2000);
-        movieNewDTO.setDuration(120);
-        movieNewDTO.setAgeRestriction(13);
-        movieNewDTO.setPosterPath("path");
-        movieNewDTO.setImdbId("tt123");
-        movieNewDTO.setGenres(List.of(1L));
-        movieNewDTO.setDirectors(List.of(1L));
-        movieNewDTO.setActors(List.of(1L));
+        MovieNew movieNew = new MovieNew();
+        movieNew.setTitle("title");
+        movieNew.setShortDescription("shortDesc");
+        movieNew.setDescription("desc");
+        movieNew.setYearOfProduction(2000);
+        movieNew.setDuration(120);
+        movieNew.setAgeRestriction(13);
+        movieNew.setPosterPath("path");
+        movieNew.setImdbId("tt123");
+        movieNew.setGenres(List.of(1L));
+        movieNew.setDirectors(List.of(1L));
+        movieNew.setActors(List.of(1L));
 
         when(referenceMapper.map(1L, Genre.class)).thenReturn(genre);
         when(referenceMapper.map(1L, Person.class)).thenReturn(person);
-        Movie newMovie = modelMapper.movieNewDTOToMovie(movieNewDTO);
+        Movie newMovie = modelMapper.movieNewToMovie(movieNew);
 
-        assertEquals(movieNewDTO.getTitle(), newMovie.getTitle());
-        assertEquals(movieNewDTO.getGenres().get(0), newMovie.getGenres().get(0).getId());
-        assertEquals(movieNewDTO.getActors().get(0), newMovie.getActors().get(0).getId());
-        assertEquals(movieNewDTO.getDirectors().get(0), newMovie.getDirectors().get(0).getId());
+        assertEquals(movieNew.getTitle(), newMovie.getTitle());
+        assertEquals(movieNew.getGenres().get(0), newMovie.getGenres().get(0).getId());
+        assertEquals(movieNew.getActors().get(0), newMovie.getActors().get(0).getId());
+        assertEquals(movieNew.getDirectors().get(0), newMovie.getDirectors().get(0).getId());
     }
 }

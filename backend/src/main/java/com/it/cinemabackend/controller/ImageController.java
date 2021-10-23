@@ -1,6 +1,6 @@
 package com.it.cinemabackend.controller;
 
-import com.it.cinemabackend.domain.dto.ImageNoId;
+import com.it.cinemabackend.domain.dto.ImageDTO;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
 import com.it.cinemabackend.domain.model.Image;
 import com.it.cinemabackend.service.ImageService;
@@ -39,8 +39,8 @@ public class ImageController {
     }
 
     @GetMapping("image/{id}")
-    public ResponseEntity<ImageNoId> getImageOfId(@PathVariable Long id) {
-        ImageNoId image = modelMapper.imageToImageNoId(imageService.findById(id));
+    public ResponseEntity<ImageDTO> getImageOfId(@PathVariable Long id) {
+        ImageDTO image = modelMapper.imageToImageNoId(imageService.findById(id));
         return ResponseEntity.ok(image);
     }
 }

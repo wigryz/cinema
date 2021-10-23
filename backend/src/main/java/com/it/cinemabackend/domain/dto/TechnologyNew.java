@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class GenreNewDTO {
+public class TechnologyNew {
 
     String name;
 }

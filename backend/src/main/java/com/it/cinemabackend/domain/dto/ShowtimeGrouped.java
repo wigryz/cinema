@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class ShowtimeGroupedDTO {
+public class ShowtimeGrouped {
 
     private Long showtimeId;
     private LocalDateTime dateTime;

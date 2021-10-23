@@ -1,18 +1,18 @@
 package com.it.cinemabackend.domain.mapper;
 
 import com.it.cinemabackend.domain.dto.GenreDTO;
-import com.it.cinemabackend.domain.dto.GenreNewDTO;
-import com.it.cinemabackend.domain.dto.ImageNoId;
+import com.it.cinemabackend.domain.dto.GenreNew;
+import com.it.cinemabackend.domain.dto.ImageDTO;
 import com.it.cinemabackend.domain.dto.MovieDTO;
-import com.it.cinemabackend.domain.dto.MovieNewDTO;
-import com.it.cinemabackend.domain.dto.MovieShortDTO;
+import com.it.cinemabackend.domain.dto.MovieNew;
+import com.it.cinemabackend.domain.dto.MovieShort;
 import com.it.cinemabackend.domain.dto.PersonDTO;
-import com.it.cinemabackend.domain.dto.PersonNewDTO;
+import com.it.cinemabackend.domain.dto.PersonNew;
 import com.it.cinemabackend.domain.dto.ShowtimeDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeGroupedDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeGrouped;
+import com.it.cinemabackend.domain.dto.ShowtimeNew;
 import com.it.cinemabackend.domain.dto.TechnologyDTO;
-import com.it.cinemabackend.domain.dto.TechnologyNewDTO;
+import com.it.cinemabackend.domain.dto.TechnologyNew;
 import com.it.cinemabackend.domain.model.Genre;
 import com.it.cinemabackend.domain.model.Image;
 import com.it.cinemabackend.domain.model.Movie;
@@ -24,9 +24,7 @@ import com.it.cinemabackend.service.TechnologyService;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
-@Component // just to get rid of "no bean of type ... warning"
 @Mapper(componentModel = "spring",
     uses = {MovieService.class, TechnologyService.class, ReferenceMapper.class},
     builder = @Builder(disableBuilder = true))
@@ -40,29 +38,29 @@ public abstract class ModelMapper {
     @Mapping(source = "technology.name", target = "technology")
     public abstract ShowtimeDTO showtimeToShowtimeDTO(Showtime showtime);
 
-    public abstract ShowtimeGroupedDTO showtimeToShowtimeGroupedDTO(Showtime showtime);
+    public abstract ShowtimeGrouped showtimeToShowtimeGroupedDTO(Showtime showtime);
 
     @Mapping(source = "movieId", target = "movie")
     @Mapping(source = "technologyId", target = "technology")
-    public abstract Showtime showtimeNewDTOToShowtime(ShowtimeNewDTO showtimeNewDTO);
+    public abstract Showtime showtimeNewToShowtime(ShowtimeNew showtimeNew);
 
-    public abstract MovieShortDTO movieToMovieShortDTO(Movie movie);
+    public abstract MovieShort movieToMovieShortDTO(Movie movie);
 
-    public abstract Movie movieNewDTOToMovie(MovieNewDTO movieNewDTO);
+    public abstract Movie movieNewToMovie(MovieNew movieNew);
 
     public abstract MovieDTO movieToMovieDTO(Movie movie);
 
     public abstract PersonDTO personToPersonDTO(Person person);
 
-    public abstract Person personNewDTOTOPerson(PersonNewDTO personNewDTO);
+    public abstract Person personNewToPerson(PersonNew personNew);
 
-    public abstract ImageNoId imageToImageNoId(Image image);
+    public abstract ImageDTO imageToImageNoId(Image image);
 
     public abstract GenreDTO genreToGenreDTO(Genre genre);
 
-    public abstract Genre genreNewDTOToGenre(GenreNewDTO genreNewDTO);
+    public abstract Genre genreNewToGenre(GenreNew genreNew);
 
-    public abstract Technology technologyNewDTOToTechnology(TechnologyNewDTO technologyNewDTO);
+    public abstract Technology technologyNewToTechnology(TechnologyNew technologyNew);
 
     public abstract TechnologyDTO technologyToTechnologyDTO(Technology technology);
 

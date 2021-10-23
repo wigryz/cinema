@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.cinemabackend.domain.dto.ShowtimeDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeNew;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
 import com.it.cinemabackend.domain.model.Language;
 import com.it.cinemabackend.domain.model.Showtime;
@@ -90,18 +90,18 @@ class ShowtimeControllerTest {
     @Test
     void addShowtime() throws Exception {
         String language = "dubbing";
-        ShowtimeNewDTO showtimeNewDTO = new ShowtimeNewDTO();
-        showtimeNewDTO.setLanguage(language);
+        ShowtimeNew showtimeNew = new ShowtimeNew();
+        showtimeNew.setLanguage(language);
         Showtime showtime = new Showtime();
         showtime.setLanguage(Language.DUBBING);
 
         when(showtimeService.save(any(Showtime.class))).thenReturn(showtime);
-        when(modelMapper.showtimeNewDTOToShowtime(any(ShowtimeNewDTO.class)))
+        when(modelMapper.showtimeNewToShowtime(any(ShowtimeNew.class)))
             .thenReturn(showtime);
 
         mockMvc.perform(post("/api/showtime")
                 .contentType(APPLICATION_JSON_UTF8)
-                .content(convertObjectToJsonBytes(showtimeNewDTO)))
+                .content(convertObjectToJsonBytes(showtimeNew)))
             .andDo(print())
             .andExpect(status().isOk());
 

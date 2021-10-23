@@ -22,7 +22,6 @@ public class MovieDTO {
     private Integer duration;
     private Integer ageRestriction;
     private String posterPath;
-    private String imdbId;
     private List<GenreDTO> genres;
     private List<PersonDTO> directors;
     private List<PersonDTO> actors;

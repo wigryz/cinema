@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class MovieShortDTO {
+public class MovieShort {
 
     private Integer id;
     private String title;
