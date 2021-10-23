@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -20,9 +21,11 @@ import lombok.Setter;
 public class Image extends BaseEntity {
 
     @Column(name = "name", nullable = false)
+    @Length(max = 100)
     private String name;
 
     @Column(name = "type", nullable = false)
+    @Length(max = 20)
     private String type;
 
     @Lob

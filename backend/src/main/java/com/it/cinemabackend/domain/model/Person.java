@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -24,22 +25,26 @@ import lombok.Setter;
 public class Person extends BaseEntity {
 
     @Column(name = "first_name", nullable = false)
+    @Length(max = 20)
     private String firstName;
 
     @Column(name = "second_name", nullable = true)
+    @Length(max = 20)
     private String secondName;
 
     @Column(name = "last_name", nullable = false)
+    @Length(max = 20)
     private String lastName;
 
     @Column(name = "portrait_path", nullable = true)
+    @Length(max = 100)
     private String portraitPath;
 
     @ManyToMany(mappedBy = "directors", cascade = CascadeType.ALL)
-    List<Movie> moviesAsDirector = new ArrayList<>();
+    private List<Movie> moviesAsDirector = new ArrayList<>();
 
     @ManyToMany(mappedBy = "actors", cascade = CascadeType.ALL)
-    List<Movie> moviesAsActor = new ArrayList<>();
+    private List<Movie> moviesAsActor = new ArrayList<>();
 
     @Override
     public String toString() {

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.Setter;
 public class Technology extends BaseEntity {
 
     @Column(name = "name", nullable = false)
+    @Pattern(regexp = "[0-9]D")
     private String name;
 
     @OneToMany(mappedBy = "technology")
