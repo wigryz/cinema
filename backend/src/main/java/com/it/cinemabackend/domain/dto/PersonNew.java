@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PersonNewDTO {
+public class PersonNew {
 
     private String firstName;
     private String secondName;

@@ -1,7 +1,7 @@
 package com.it.cinemabackend.controller;
 
 import com.it.cinemabackend.domain.dto.PersonDTO;
-import com.it.cinemabackend.domain.dto.PersonNewDTO;
+import com.it.cinemabackend.domain.dto.PersonNew;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
 import com.it.cinemabackend.domain.model.Person;
 import com.it.cinemabackend.service.PersonService;
@@ -44,8 +44,8 @@ public class PersonController {
     }
 
     @PostMapping("/person")
-    public ResponseEntity<Long> addPerson(@RequestBody PersonNewDTO personNewDTO) {
-        Person person = personService.save(modelMapper.personNewDTOTOPerson(personNewDTO));
+    public ResponseEntity<Long> addPerson(@RequestBody PersonNew personNew) {
+        Person person = personService.save(modelMapper.personNewToPerson(personNew));
         return new ResponseEntity<>(person.getId(), HttpStatus.OK);
     }
 }

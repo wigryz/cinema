@@ -1,11 +1,11 @@
 package com.it.cinemabackend.controller;
 
-import com.it.cinemabackend.domain.dto.MovieShortDTO;
+import com.it.cinemabackend.domain.dto.MovieShort;
 import com.it.cinemabackend.domain.dto.ShowtimeDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeGroupedDTO;
-import com.it.cinemabackend.domain.dto.ShowtimeNewDTO;
+import com.it.cinemabackend.domain.dto.ShowtimeGrouped;
+import com.it.cinemabackend.domain.dto.ShowtimeNew;
 import com.it.cinemabackend.domain.dto.TechnologyDTO;
-import com.it.cinemabackend.domain.dto.TechnologyNewDTO;
+import com.it.cinemabackend.domain.dto.TechnologyNew;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
 import com.it.cinemabackend.domain.model.Movie;
 import com.it.cinemabackend.domain.model.Showtime;
@@ -52,16 +52,16 @@ public class ShowtimeController {
     }
 
     @GetMapping("/showtime/current-grouped")
-    public ResponseEntity<Map<MovieShortDTO, List<ShowtimeGroupedDTO>>> getCurrentGrouped() {
-        Map<MovieShortDTO, List<ShowtimeGroupedDTO>> groupedDTOMap =
+    public ResponseEntity<Map<MovieShort, List<ShowtimeGrouped>>> getCurrentGrouped() {
+        Map<MovieShort, List<ShowtimeGrouped>> groupedDTOMap =
             groupShowtimeByMovieAndMapToDTO(showtimeService.findCurrent());
         return new ResponseEntity<>(groupedDTOMap, HttpStatus.OK);
     }
 
     @GetMapping("/showtime/of-date-grouped/{dateStr}")
-    public ResponseEntity<Map<MovieShortDTO, List<ShowtimeGroupedDTO>>> getCurrentGrouped(@PathVariable String dateStr) {
+    public ResponseEntity<Map<MovieShort, List<ShowtimeGrouped>>> getCurrentGrouped(@PathVariable String dateStr) {
         LocalDate date = LocalDate.parse(dateStr, dateFormatter);
-        Map<MovieShortDTO, List<ShowtimeGroupedDTO>> groupedDTOMap =
+        Map<MovieShort, List<ShowtimeGrouped>> groupedDTOMap =
             groupShowtimeByMovieAndMapToDTO(showtimeService.findByDate(date));
         return new ResponseEntity<>(groupedDTOMap, HttpStatus.OK);
     }
@@ -82,8 +82,8 @@ public class ShowtimeController {
     }
 
     @PostMapping("/showtime")
-    public ResponseEntity<String> add(@RequestBody ShowtimeNewDTO showtimeNewDTO) {
-        Showtime showtime = modelMapper.showtimeNewDTOToShowtime(showtimeNewDTO);
+    public ResponseEntity<String> add(@RequestBody ShowtimeNew showtimeNew) {
+        Showtime showtime = modelMapper.showtimeNewToShowtime(showtimeNew);
         showtime = showtimeService.save(showtime);
         log.info("Added new showtime object to database: {}", showtime);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -98,13 +98,13 @@ public class ShowtimeController {
     }
 
     @GetMapping("/technology")
-    public ResponseEntity<Long> addTechnology(@RequestBody TechnologyNewDTO technologyNewDTO) {
+    public ResponseEntity<Long> addTechnology(@RequestBody TechnologyNew technologyNew) {
         Technology technology =
-            technologyService.save(modelMapper.technologyNewDTOToTechnology(technologyNewDTO));
+            technologyService.save(modelMapper.technologyNewToTechnology(technologyNew));
         return new ResponseEntity<>(technology.getId(), HttpStatus.OK);
     }
 
-    private Map<MovieShortDTO, List<ShowtimeGroupedDTO>>
+    private Map<MovieShort, List<ShowtimeGrouped>>
     groupShowtimeByMovieAndMapToDTO(List<Showtime> showtimeList) {
         Map<Movie, List<Showtime>> movieShowtimesMap =
             showtimeList.stream().collect(Collectors.groupingBy(Showtime::getMovie));

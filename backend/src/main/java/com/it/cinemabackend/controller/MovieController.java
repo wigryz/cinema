@@ -1,9 +1,9 @@
 package com.it.cinemabackend.controller;
 
 import com.it.cinemabackend.domain.dto.GenreDTO;
-import com.it.cinemabackend.domain.dto.GenreNewDTO;
+import com.it.cinemabackend.domain.dto.GenreNew;
 import com.it.cinemabackend.domain.dto.MovieDTO;
-import com.it.cinemabackend.domain.dto.MovieNewDTO;
+import com.it.cinemabackend.domain.dto.MovieNew;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
 import com.it.cinemabackend.domain.model.Genre;
 import com.it.cinemabackend.domain.model.Movie;
@@ -48,8 +48,8 @@ public class MovieController {
     }
 
     @PostMapping("movie")
-    public ResponseEntity<Long> addMovie(@RequestBody MovieNewDTO movieNewDTO) {
-        Movie movie = movieService.save(modelMapper.movieNewDTOToMovie(movieNewDTO));
+    public ResponseEntity<Long> addMovie(@RequestBody MovieNew movieNew) {
+        Movie movie = movieService.save(modelMapper.movieNewToMovie(movieNew));
         return new ResponseEntity<>(movie.getId(), HttpStatus.OK);
     }
 
@@ -62,8 +62,8 @@ public class MovieController {
     }
 
     @PostMapping("/genre")
-    public ResponseEntity<Long> addGenre(@RequestBody GenreNewDTO genreNewDTO) {
-        Genre genre = genreService.save(modelMapper.genreNewDTOToGenre(genreNewDTO));
+    public ResponseEntity<Long> addGenre(@RequestBody GenreNew genreNew) {
+        Genre genre = genreService.save(modelMapper.genreNewToGenre(genreNew));
         return new ResponseEntity<>(genre.getId(), HttpStatus.OK);
     }
 }
