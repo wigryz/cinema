@@ -25,22 +25,26 @@ import lombok.Setter;
 @Table(name = "movie")
 public class Movie extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "title",nullable = false)
     private String title;
 
+    @Column(name = "short_description", nullable = true)
     private String shortDescription;
 
+    @Column(name = "description", nullable = true)
     private String description;
 
+    @Column(name = "year_of_production", nullable = true)
     private Integer yearOfProduction;
 
+    @Column(name = "duration", nullable = true)
     private Integer duration;
 
+    @Column(name = "age_restriction", nullable = true)
     private Integer ageRestriction;
 
+    @Column(name = "poster_path", nullable = true)
     private String posterPath;
-
-    private String imdbId;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Showtime> showtimes;
@@ -71,7 +75,6 @@ public class Movie extends BaseEntity {
             ", duration=" + duration +
             ", ageRestriction=" + ageRestriction +
             ", posterPath='" + posterPath + '\'' +
-            ", imdbId='" + imdbId + '\'' +
             ", genres=" + genres.stream().map(BaseEntity::getId).toList() +
             ", directors=" + directors.stream().map(BaseEntity::getId).toList() +
             ", actors=" + actors.stream().map(BaseEntity::getId).toList() +

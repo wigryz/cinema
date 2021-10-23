@@ -52,8 +52,7 @@ class ModelMapperTest {
             .portraitPath("path").build();
         movie = Movie.builder().title("T").shortDescription("SD").description("D")
             .yearOfProduction(2000).duration(25).ageRestriction(13).posterPath("path")
-            .genres(List.of(genre)).actors(List.of(person)).directors(List.of(person))
-            .imdbId("tt123").build();
+            .genres(List.of(genre)).actors(List.of(person)).directors(List.of(person)).build();
         person.setMoviesAsActor(List.of(movie));
         person.setMoviesAsDirector(List.of(movie));
         showtime = Showtime.builder().movie(movie).dateTime(LocalDateTime.now())

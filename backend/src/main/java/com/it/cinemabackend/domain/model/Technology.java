@@ -19,7 +19,7 @@ import lombok.Setter;
 @Table(name = "technology")
 public class Technology extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "technology")

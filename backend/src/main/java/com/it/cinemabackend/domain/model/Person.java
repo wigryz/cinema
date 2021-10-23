@@ -23,14 +23,16 @@ import lombok.Setter;
 @Table(name = "person")
 public class Person extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
+    @Column(name = "second_name", nullable = true)
     private String secondName;
 
-    @Column(nullable = false)
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @Column(name = "portrait_path", nullable = true)
     private String portraitPath;
 
     @ManyToMany(mappedBy = "directors", cascade = CascadeType.ALL)

@@ -21,7 +21,7 @@ import lombok.Setter;
 @Table(name = "genre")
 public class Genre extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)
