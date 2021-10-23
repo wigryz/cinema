@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -22,6 +23,7 @@ import lombok.Setter;
 public class Genre extends BaseEntity {
 
     @Column(name = "name", nullable = false)
+    @Length(max = 20)
     private String name;
 
     @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL)

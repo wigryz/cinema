@@ -15,6 +15,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -26,12 +27,15 @@ import lombok.Setter;
 public class Movie extends BaseEntity {
 
     @Column(name = "title",nullable = false)
+    @Length(max = 100)
     private String title;
 
     @Column(name = "short_description", nullable = true)
+    @Length(max = 255)
     private String shortDescription;
 
     @Column(name = "description", nullable = true)
+    @Length(max = 65535)
     private String description;
 
     @Column(name = "year_of_production", nullable = true)
@@ -44,6 +48,7 @@ public class Movie extends BaseEntity {
     private Integer ageRestriction;
 
     @Column(name = "poster_path", nullable = true)
+    @Length(max = 100)
     private String posterPath;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
