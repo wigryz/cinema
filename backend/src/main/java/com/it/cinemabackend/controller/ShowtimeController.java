@@ -97,7 +97,7 @@ public class ShowtimeController {
         return new ResponseEntity<>(technologyDTOs, HttpStatus.OK);
     }
 
-    @GetMapping("/technology")
+    @PostMapping("/technology")
     public ResponseEntity<Long> addTechnology(@RequestBody TechnologyNew technologyNew) {
         Technology technology =
             technologyService.save(modelMapper.technologyNewToTechnology(technologyNew));

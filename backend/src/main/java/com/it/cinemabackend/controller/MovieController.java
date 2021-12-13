@@ -10,9 +10,13 @@ import com.it.cinemabackend.domain.model.Movie;
 import com.it.cinemabackend.service.GenreService;
 import com.it.cinemabackend.service.MovieService;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,5 +69,10 @@ public class MovieController {
     public ResponseEntity<Long> addGenre(@RequestBody GenreNew genreNew) {
         Genre genre = genreService.save(modelMapper.genreNewToGenre(genreNew));
         return new ResponseEntity<>(genre.getId(), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> handleNoSuchElementException() {
+        return ResponseEntity.of(Optional.of("Pojebanys."));
     }
 }
