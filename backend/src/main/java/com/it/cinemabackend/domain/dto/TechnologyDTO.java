@@ -1,16 +1,7 @@
 package com.it.cinemabackend.domain.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+public record TechnologyDTO(
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class TechnologyDTO {
-
-    private Long id;
-    private String name;
+    Long id,
+    String name) {
 }

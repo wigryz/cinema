@@ -13,6 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.it.cinemabackend.domain.dto.ShowtimeDTO;
 import com.it.cinemabackend.domain.dto.ShowtimeNew;
 import com.it.cinemabackend.domain.mapper.ModelMapper;
@@ -20,10 +21,13 @@ import com.it.cinemabackend.domain.model.Language;
 import com.it.cinemabackend.domain.model.Showtime;
 import com.it.cinemabackend.service.ShowtimeService;
 import com.it.cinemabackend.service.TechnologyService;
+
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -48,7 +52,8 @@ class ShowtimeControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        showtimeController = new ShowtimeController(showtimeService, technologyService, modelMapper);
+        showtimeController = new ShowtimeController(showtimeService, technologyService,
+                                                    modelMapper);
         mockMvc = MockMvcBuilders.standaloneSetup(showtimeController).build();
     }
 
@@ -57,14 +62,14 @@ class ShowtimeControllerTest {
         LocalDateTime dateTime = LocalDateTime.of(2000, 4, 27, 12, 0);
         Showtime showtime = new Showtime();
         showtime.setDateTime(dateTime);
-        ShowtimeDTO showtimeDTO = new ShowtimeDTO();
-        showtimeDTO.setDateTime(dateTime);
+        ShowtimeDTO showtimeDTO = new ShowtimeDTO(0L, 0L, "title", Collections.emptyList(), 12, 123,
+                                                  dateTime, "2D", "dubbing");
         when(showtimeService.findCurrent()).thenReturn(List.of(showtime));
         when(modelMapper.showtimeToShowtimeDTO(any(Showtime.class))).thenReturn(showtimeDTO);
 
         mockMvc.perform(get("/api/showtime/current"))
-            .andExpect(status().isOk())
-            .andExpect(content().json("[{'dateTime':[2000,4,27,12,0]}]"));
+               .andExpect(status().isOk())
+               .andExpect(content().json("[{\"dateTime\":[2000,4,27,12,0]}]"));
 
         verify(showtimeService, times(1)).findCurrent();
     }
@@ -74,24 +79,25 @@ class ShowtimeControllerTest {
         LocalDateTime dateTime = LocalDateTime.of(2000, 4, 27, 12, 0);
         Showtime showtime = new Showtime();
         showtime.setDateTime(dateTime);
-        ShowtimeDTO showtimeDTO = new ShowtimeDTO();
-        showtimeDTO.setDateTime(dateTime);
+        ShowtimeDTO showtimeDTO = new ShowtimeDTO(0L, 0L, "title", Collections.emptyList(), 12, 123,
+                                                  dateTime, "2D", "dubbing");
         when(showtimeService.findByDate(dateTime.toLocalDate())).thenReturn(List.of(showtime));
         when(modelMapper.showtimeToShowtimeDTO(any(Showtime.class))).thenReturn(showtimeDTO);
 
         mockMvc.perform(get(String.format("/api/showtime/of-date/%s",
-                dateTime.toLocalDate().format(DateTimeFormatter.ISO_DATE))))
-            .andExpect(status().isOk())
-            .andExpect(content().json("[{'dateTime':[2000,4,27,12,0]}]"));
+                                          dateTime.toLocalDate()
+                                                  .format(DateTimeFormatter.ISO_DATE))))
+               .andExpect(status().isOk())
+               .andExpect(content().json("[{\"dateTime\":[2000,4,27,12,0]}]"));
 
         verify(showtimeService, times(1)).findByDate(dateTime.toLocalDate());
     }
 
     @Test
     void addShowtime() throws Exception {
+        LocalDateTime dateTime = LocalDateTime.of(2000, 4, 27, 12, 0);
         String language = "dubbing";
-        ShowtimeNew showtimeNew = new ShowtimeNew();
-        showtimeNew.setLanguage(language);
+        ShowtimeNew showtimeNew = new ShowtimeNew(0L, dateTime, 0L, language);
         Showtime showtime = new Showtime();
         showtime.setLanguage(Language.DUBBING);
 
@@ -100,10 +106,10 @@ class ShowtimeControllerTest {
             .thenReturn(showtime);
 
         mockMvc.perform(post("/api/showtime")
-                .contentType(APPLICATION_JSON_UTF8)
-                .content(convertObjectToJsonBytes(showtimeNew)))
-            .andDo(print())
-            .andExpect(status().isOk());
+                            .contentType(APPLICATION_JSON_UTF8)
+                            .content(convertObjectToJsonBytes(showtimeNew)))
+               .andDo(print())
+               .andExpect(status().isOk());
 
         verify(showtimeService, times(1)).save(any(Showtime.class));
     }
@@ -116,6 +122,7 @@ class ShowtimeControllerTest {
     public static byte[] convertObjectToJsonBytes(Object object) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.registerModule(new JavaTimeModule());
         return mapper.writeValueAsBytes(object);
     }
 }

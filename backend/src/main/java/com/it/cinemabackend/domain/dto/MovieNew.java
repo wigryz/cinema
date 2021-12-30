@@ -1,28 +1,17 @@
 package com.it.cinemabackend.domain.dto;
 
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class MovieNew {
-
-    private String title;
-    private String shortDescription;
-    private String description;
-    private Integer yearOfProduction;
-    private Integer duration;
-    private Integer ageRestriction;
-    private String posterPath;
-    private String imdbId;
-    private List<Long> genres;
-    private List<Long> directors;
-    private List<Long> actors;
+public record MovieNew(
+    String title,
+    String shortDescription,
+    String description,
+    Integer yearOfProduction,
+    Integer duration,
+    Integer ageRestriction,
+    String posterPath,
+    String imdbId,
+    List<Long> genres,
+    List<Long> directors,
+    List<Long> actors) {
 }

@@ -2,24 +2,16 @@ package com.it.cinemabackend.domain.dto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-public class ShowtimeDTO {
+public record ShowtimeDTO(
 
-    private Long id;
-    private Long movieId;
-    private String title;
-    private List<GenreDTO> genres;
-    private Integer ageRestriction;
-    private String duration;
-    private LocalDateTime dateTime;
-    private String technology;
-    private String language;
+    Long id,
+    Long movieId,
+    String title,
+    List<GenreDTO> genres,
+    Integer ageRestriction,
+    Integer duration,
+    LocalDateTime dateTime,
+    String technology,
+    String language) {
 }

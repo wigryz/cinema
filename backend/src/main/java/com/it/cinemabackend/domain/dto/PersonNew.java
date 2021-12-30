@@ -1,20 +1,9 @@
 package com.it.cinemabackend.domain.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+public record PersonNew(
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class PersonNew {
-
-    private String firstName;
-    private String secondName;
-    private String lastName;
-    private String portraitPath;
+    String firstName,
+    String secondName,
+    String lastName,
+    String portraitPath) {
 }
