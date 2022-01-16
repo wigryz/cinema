@@ -80,7 +80,7 @@ public class AuthenticationController {
             .email(request.getEmail())
             .enabled(false)
             .createdAt(LocalDateTime.now())
-            .roles(Set.of(roleService.findByName("ROLE_USER"))) //TODO SHOULD BE REFACTORED SOMEHOW
+            .roles(Set.of(roleService.findByName(request.getRole()))) //TODO SHOULD BE REFACTORED SOMEHOW
             .build();
         userService.save(user);
 

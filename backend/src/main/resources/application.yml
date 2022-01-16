@@ -19,13 +19,14 @@ spring:
     init:
       mode: always
   mail:
-    host: smtp.mail.com
-    username: mail@mail.com
-    password: password
+    host: smtp.gmail.com
+    username: cinema.backend.auto@gmail.com
+    password: qbcnzzrxgzxmxyyl
     port: 587
     properties:
       mail:
         smtp:
+          auth: true
           starttls:
             enable: true
 logging:

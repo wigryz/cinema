@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  cinema-db:
+    container_name: cinema-db
+    image: mysql:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: cinemadb
+      MYSQL_USER: cinema
+      MYSQL_PASSWORD: cinema
+    networks:
+      - cinema-network
+    volumes:
+      - ./database:/database
+    command: --init-file /database/cinemadb-b.sql
+  cinema-backend:
+    container_name: cinema-backend
+    depends_on:
+      - cinema-db
+    build: ./backend
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://cinema-db/cinemadb
+      - SERVER_PORT=8080
+    restart: on-failure
+    ports:
+      - 8080:8080
+    networks:
+      - cinema-network
+    stdin_open: true
+    tty: true
+    
+networks:
+  cinema-network: 
