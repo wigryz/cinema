@@ -16,10 +16,8 @@ import com.it.cinemabackend.domain.model.Showtime;
 import com.it.cinemabackend.domain.model.Technology;
 import com.it.cinemabackend.service.MovieService;
 import com.it.cinemabackend.service.TechnologyService;
-
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

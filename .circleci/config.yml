@@ -50,10 +50,10 @@ jobs:
                  printf "%6d / %6d = %4.2f%% complexities covered\n", comp_cov, complexity, complexity ? 100*comp_cov/complexity : 0; }' \
               target/coverage_reports/jacoco.csv
 
-      - run:
-          name: Validating imports
-          when: on_success
-          command: ./mvnw impsort:check
+      # - run:
+      #     name: Validating imports
+      #     when: on_success
+      #     command: ./mvnw impsort:check
 
       - store_test_results:
           name: Uploading unit test results
