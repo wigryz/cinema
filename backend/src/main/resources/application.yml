@@ -21,7 +21,7 @@ spring:
   mail:
     host: smtp.gmail.com
     username: cinema.backend.auto@gmail.com
-    password: qbcnzzrxgzxmxyyl
+    password: haslo
     port: 587
     properties:
       mail:
