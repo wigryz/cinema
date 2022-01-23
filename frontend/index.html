@@ -1,23 +1,73 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Cinema</title>
-    </head>
-    <body>
-        <div id="app">
-            {{ greeting }}
-        </div>
 
-        <script src="https://unpkg.com/vue@next"></script>
-        <script>
-            let app = Vue.createApp({
-                data: function(){
-                    return {
-                        greeting: 'Hello vue!'
-                    }
+<head>
+    <title>Cinema</title>
+    <style>
+        .box {
+            height: 200px;
+            width: 200px;
+            background-color: blue;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+        input{
+            margin: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        <custom-form />
+
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        let app = Vue.createApp({
+            data: function () {
+                return {
+                    greeting: 'Hello vue!',
+                    isVisible: false
                 }
-            })
-            app.mount('#app')
-        </script>
-    </body>
+            },
+            methods: {
+                toggleBox(){
+                    this.isVisible = !this.isVisible
+                },
+                greet(greeting){
+                    console.log(greeting)
+                }
+            }
+        })
+        app.component('custom-form', {
+            template: `
+                <form @submit.prevent="handleSubmit">
+                    <h1>{{ title }}</h1>
+                    <input type="email" v-model="email"/>
+                    <input type="password" v-model="password"/>
+                    <button>Login in</button>
+                </form>
+            `,
+            data(){
+                return {
+                    title: 'Login form',
+                    email: '',
+                    password: ''
+                }
+            },
+            methods: {
+                handleSubmit() {
+                    console.log(this.email + " " + this.password)
+                }
+            }
+        })
+        app.mount('#app')
+    </script>
+</body>
+
 </html>
