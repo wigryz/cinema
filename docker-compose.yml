@@ -30,6 +30,15 @@ services:
       - cinema-network
     stdin_open: true
     tty: true
-    
+  cinema-frontend:
+    container_name: cinema-frontend
+    depends_on:
+      - cinema-backend
+    build: ./frontend
+    restart: on-failure
+    ports:
+      - 8081:8081
+    networks:
+      - cinema-network
 networks:
   cinema-network: 

@@ -1,13 +1,13 @@
 <template>
-  <div class="movie">
+  <div class='movie'>
     <h1>List of movies</h1>
-    <table class="table table-striped">
+    <table class='table table-striped'>
       <thead>
         <th>Movie name</th>
         <th>Description</th>
       </thead>
       <tbody>
-        <tr v-for="movie in movies" v-bind:key="movie.id">
+        <tr v-for='movie in movies' v-bind:key='movie.id'>
           <td>{{ movie.title }}</td>
           <td>{{ movie.shortDescription }}</td>
         </tr>
@@ -17,25 +17,25 @@
 </template>
 
 <script>
-import MovieService from "../services/MoviesService";
+import MovieService from '../services/MoviesService'
 
 export default {
-  name: "Movie",
+  name: 'Movie',
 
-  data() {
+  data () {
     return {
-      movies: [],
-    };
+      movies: []
+    }
   },
   methods: {
-    getMovies() {
+    getMovies () {
       MovieService.getMovies().then((response) => {
-        this.movies = response.data;
-      });
-    },
+        this.movies = response.data
+      })
+    }
   },
-  created() {
-    this.getMovies();
-  },
-};
+  created () {
+    this.getMovies()
+  }
+}
 </script>
